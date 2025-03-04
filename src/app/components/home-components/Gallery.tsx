@@ -74,7 +74,7 @@ export default function Gallery() {
 }
 
 // Gallery Item Component with Hover Effect
-function GalleryItem({ image:any, title, description }) {
+function GalleryItem({ image, title, description }) {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
