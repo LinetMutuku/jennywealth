@@ -2,7 +2,14 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import {StaticImageData} from "next/image";
+import gallery1 from '@/../public/assets/gallery-1.jpeg'
+import gallery2 from '@/../public/assets/gallery-2.jpeg'
+import gallery3 from '@/../public/assets/gallery-3.jpeg'
+import gallery4 from '@/../public/assets/gallery-4.jpeg'
+import gallery5 from '@/../public/assets/gallery-5.jpeg'
+import gallery6 from '@/../public/assets/gallery-6.jpeg'
+import { StaticImageData } from 'next/image';
+
 // Define TypeScript interfaces for our components
 interface GalleryItemProps {
     pictures: string | StaticImageData;
@@ -16,8 +23,9 @@ interface GalleryItem {
     title: string;
     description: string;
 }
+
 export default function Gallery() {
-    const galleryItems = [
+    const galleryItems: GalleryItem[] = [
         {
             id: 1,
             image: '/assets/gallery-1.jpeg',
@@ -26,31 +34,31 @@ export default function Gallery() {
         },
         {
             id: 2,
-            image: '/assets/gallery-2.jpeg',
+            image: gallery2,
             title: 'Corporate Gala Night',
             description: 'A prestigious evening of networking, fine dining, and entertainment.',
         },
         {
             id: 3,
-            image: '/assets/gallery-3.jpeg',
+            image: gallery3,
             title: 'Birthday Celebration',
             description: 'A stylish birthday event with luxury décor and personalized touches.',
         },
         {
             id: 4,
-            image: '/assets/gallery-4.jpeg',
+            image: gallery4,
             title: 'Engagement Party',
             description: 'A beautifully themed engagement celebration full of charm and love.',
         },
         {
             id: 5,
-            image: '/assets/gallery-5.jpeg',
+            image: gallery5,
             title: 'Award Ceremony',
             description: 'A grand event honoring excellence with a red carpet experience.',
         },
         {
             id: 6,
-            image: '/assets/gallery-6.jpeg',
+            image: gallery6,
             title: 'Exclusive Dinner Party',
             description: 'An intimate evening with fine dining and elegant ambiance.',
         },
@@ -67,7 +75,7 @@ export default function Gallery() {
                     {galleryItems.map((item) => (
                         <GalleryItem
                             key={item.id}
-                            image={item.image}
+                            pictures={item.image}
                             title={item.title}
                             description={item.description}
                         />
@@ -88,7 +96,7 @@ export default function Gallery() {
 }
 
 // Gallery Item Component with Hover Effect
-function GalleryItem({ image, title, description }) {
+function GalleryItem({ pictures, title, description }: GalleryItemProps) {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
@@ -100,7 +108,7 @@ function GalleryItem({ image, title, description }) {
         >
             {/* Image */}
             <img
-                src={image}
+                src={pictures.toString()}
                 alt={title}
                 className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
             />
