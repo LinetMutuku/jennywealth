@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-
+const image = require('@/../public/assets/')
 export default function Gallery() {
     const galleryItems = [
         {
@@ -75,7 +75,7 @@ export default function Gallery() {
 }
 
 // Gallery Item Component with Hover Effect
-function GalleryItem({ image, title, description }) {
+function GalleryItem({ image:any, title, description }) {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
