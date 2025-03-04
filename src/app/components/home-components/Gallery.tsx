@@ -59,7 +59,7 @@ export default function Gallery() {
                     {galleryItems.map((item) => (
                         <GalleryItem
                             key={item.id}
-                            image={item.image}
+                            pictures={item.image}
                             title={item.title}
                             description={item.description}
                         />
