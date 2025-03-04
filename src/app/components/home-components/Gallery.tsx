@@ -80,7 +80,7 @@ export default function Gallery() {
 }
 
 // Gallery Item Component with Hover Effect
-function GalleryItem({ image, title, description }) {
+function GalleryItem({ pictures, title, description }) {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
@@ -92,7 +92,7 @@ function GalleryItem({ image, title, description }) {
         >
             {/* Image */}
             <img
-                src={image}
+                src={pictures}
                 alt={title}
                 className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
             />
