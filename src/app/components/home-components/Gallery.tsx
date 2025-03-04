@@ -19,7 +19,7 @@ interface GalleryItemProps {
 
 interface GalleryItem {
     id: number;
-    image: StaticImageData;
+    image: string | StaticImageData;
     title: string;
     description: string;
 }
