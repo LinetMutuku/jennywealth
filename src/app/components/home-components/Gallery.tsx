@@ -8,41 +8,57 @@ import gallery3 from '@/../public/assets/gallery-3.jpeg'
 import gallery4 from '@/../public/assets/gallery-4.jpeg'
 import gallery5 from '@/../public/assets/gallery-5.jpeg'
 import gallery6 from '@/../public/assets/gallery-6.jpeg'
+import { StaticImageData } from 'next/image';
+
+// Define TypeScript interfaces for our components
+interface GalleryItemProps {
+    pictures: string | StaticImageData;
+    title: string;
+    description: string;
+}
+
+interface GalleryItem {
+    id: number;
+    image: StaticImageData;
+    title: string;
+    description: string;
+}
+
 export default function Gallery() {
-    const galleryItems = [
+    const galleryItems: GalleryItem[] = [
         {
             id: 1,
-            image: (gallery1),
+            image: gallery1,
             title: 'Luxury Wedding Reception',
             description: 'An elegant wedding with stunning décor and a romantic ambiance.',
         },
         {
             id: 2,
-            image: (gallery2),
+            image: gallery2,
             title: 'Corporate Gala Night',
             description: 'A prestigious evening of networking, fine dining, and entertainment.',
         },
         {
             id: 3,
-            image: (gallery3),
+            image: gallery3,
             title: 'Birthday Celebration',
             description: 'A stylish birthday event with luxury décor and personalized touches.',
         },
         {
             id: 4,
-                image: (gallery4),
+            image: gallery4,
             title: 'Engagement Party',
             description: 'A beautifully themed engagement celebration full of charm and love.',
         },
         {
             id: 5,
-            image: (gallery5),
+            image: gallery5,
             title: 'Award Ceremony',
             description: 'A grand event honoring excellence with a red carpet experience.',
         },
         {
             id: 6,
-            image: (gallery6),
+            image: gallery6,
             title: 'Exclusive Dinner Party',
             description: 'An intimate evening with fine dining and elegant ambiance.',
         },
@@ -80,7 +96,7 @@ export default function Gallery() {
 }
 
 // Gallery Item Component with Hover Effect
-function GalleryItem({ pictures, title, description }) {
+function GalleryItem({ pictures, title, description }: GalleryItemProps) {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
@@ -92,7 +108,7 @@ function GalleryItem({ pictures, title, description }) {
         >
             {/* Image */}
             <img
-                src={pictures}
+                src={pictures.toString()}
                 alt={title}
                 className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-110"
             />
