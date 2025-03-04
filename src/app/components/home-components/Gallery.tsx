@@ -2,41 +2,47 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import gallery1 from '@/../public/assets/gallery-1.jpeg'
+import gallery2 from '@/../public/assets/gallery-2.jpeg'
+import gallery3 from '@/../public/assets/gallery-3.jpeg'
+import gallery4 from '@/../public/assets/gallery-4.jpeg'
+import gallery5 from '@/../public/assets/gallery-5.jpeg'
+import gallery6 from '@/../public/assets/gallery-6.jpeg'
 export default function Gallery() {
     const galleryItems = [
         {
             id: 1,
-            image: '/assets/gallery-1.jpeg',
+            image: (gallery1),
             title: 'Luxury Wedding Reception',
             description: 'An elegant wedding with stunning décor and a romantic ambiance.',
         },
         {
             id: 2,
-            image: '/assets/gallery-2.jpeg',
+            image: (gallery2),
             title: 'Corporate Gala Night',
             description: 'A prestigious evening of networking, fine dining, and entertainment.',
         },
         {
             id: 3,
-            image: '/assets/gallery-3.jpeg',
+            image: (gallery3),
             title: 'Birthday Celebration',
             description: 'A stylish birthday event with luxury décor and personalized touches.',
         },
         {
             id: 4,
-            image: '/assets/gallery-4.jpeg',
+                image: (gallery4),
             title: 'Engagement Party',
             description: 'A beautifully themed engagement celebration full of charm and love.',
         },
         {
             id: 5,
-            image: '/assets/gallery-5.jpeg',
+            image: (gallery5),
             title: 'Award Ceremony',
             description: 'A grand event honoring excellence with a red carpet experience.',
         },
         {
             id: 6,
-            image: '/assets/gallery-6.jpeg',
+            image: (gallery6),
             title: 'Exclusive Dinner Party',
             description: 'An intimate evening with fine dining and elegant ambiance.',
         },
