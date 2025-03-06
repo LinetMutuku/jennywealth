@@ -124,7 +124,7 @@ const Navbar = () => {
                         Testimonials
                     </Link>
                     <Link
-                        href="/contact-us"
+                        href="/contact"
                         className="hover:text-yellow-400 transition-colors"
                         onClick={() => setIsMenuOpen(false)}
                     >
