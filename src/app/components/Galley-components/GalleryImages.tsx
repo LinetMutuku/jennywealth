@@ -17,9 +17,9 @@ interface ImageObject {
 interface GalleryRowConfig {
     layout: RowLayoutType;
     images: {
-        small1?: ImageObject;
-        small2?: ImageObject;
-        big?: ImageObject;
+        small1: ImageObject;
+        small2: ImageObject;
+        big: ImageObject;
     };
 }
 
