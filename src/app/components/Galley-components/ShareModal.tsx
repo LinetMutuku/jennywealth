@@ -49,7 +49,6 @@ const ShareModal = ({ isOpen, onClose, image }) => {
                     </a>
                 </div>
 
-                {/* Copy link section - simplified to match your screenshot */}
                 <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden shadow-sm">
                     <input
                         type="text"

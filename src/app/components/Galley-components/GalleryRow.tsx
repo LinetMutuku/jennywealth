@@ -17,57 +17,45 @@ type GalleryRowProps = {
 
 const GalleryRow: React.FC<GalleryRowProps> = ({layout, images, onShareImage, isLastRow = false
                                                }) => {
-    // Function to determine optimal height for different image types and content
+
     const getOptimalHeight = (imageType: 'small' | 'big', alt: string) => {
         const altText = alt.toLowerCase();
 
-        // More specific height adjustments based on content
         if (imageType === 'small') {
-            // For traditional wedding images (often full-body shots)
             if (altText.includes('traditional')) {
                 return "h-[250px]";
             }
 
-            // For bride images with dress
             if (altText.includes('bride')) {
                 return "h-[260px]";
             }
 
-            // For standard couple shots
             if (altText.includes('couple')) {
                 return "h-[240px]";
             }
 
-            // For men/groom
             if (altText.includes('men') || altText.includes('man') || altText.includes('groom')) {
                 return "h-[250px]";
             }
 
-            // Default for other small images
+
             return "h-[220px]";
         } else {
-            // For big images
-            // For bride images with full dress
             if (altText.includes('bride')) {
                 return "h-[520px]";
             }
 
-            // For traditional couple images
             if (altText.includes('traditional')) {
                 return "h-[510px]";
             }
 
-            // For standard couple shots
             if (altText.includes('couple')) {
                 return "h-[500px]";
             }
-
-            // For men/groom
             if (altText.includes('men') || altText.includes('man') || altText.includes('groom')) {
                 return "h-[500px]";
             }
 
-            // Default for other big images
             return "h-[456px]";
         }
     };
