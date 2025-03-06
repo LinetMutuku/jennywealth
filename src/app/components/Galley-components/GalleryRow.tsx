@@ -63,7 +63,6 @@ const GalleryRow: React.FC<GalleryRowProps> = ({layout, images, onShareImage, is
     return (
         <div className={`grid grid-cols-1 md:grid-cols-12 gap-6 ${isLastRow ? '' : 'mb-10'}`}>
             {layout === 'two-small-one-big' ? (
-                // Two small images on the left, one big on the right
                 <>
                     <div className="md:col-span-6 grid grid-rows-2 gap-6">
                         <GalleryImageItem
@@ -89,7 +88,6 @@ const GalleryRow: React.FC<GalleryRowProps> = ({layout, images, onShareImage, is
                     </div>
                 </>
             ) : (
-                // One big image on the left, two small on the right
                 <>
                     <div className="md:col-span-6">
                         <GalleryImageItem
