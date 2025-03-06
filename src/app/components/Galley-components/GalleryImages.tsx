@@ -6,11 +6,11 @@ import GalleryRow from './GalleryRow';
 
 const GalleryImages = () => {
     // State for the modal
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
     // Function to handle opening the modal
-    const handleShareImage = (imageSrc) => {
+    const handleShareImage = (imageSrc: string) => {
         setSelectedImage(imageSrc);
         setIsModalOpen(true);
     };
