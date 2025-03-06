@@ -8,7 +8,7 @@ import VenueSelection from '../components/Services-components/VenueSelection'
 import EventDesign from '../components/Services-components/EventDesign';
 import OnsiteCoordination from '../components/Services-components/OnsiteCoordination';
 import Entertainment from '../components/Services-components/Entertainment';
-import Services from '../components/home-components/Services';
+import Services from '@/app/components/Home-components/Services';
 
 export default function ServicePage() {
     return (

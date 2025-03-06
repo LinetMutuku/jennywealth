@@ -26,10 +26,10 @@ const OurJourney = () => {
                         </p>
 
                         <div className="flex gap-4">
-                            <button className="px-6 py-2 border border-gray-300 rounded-full hover:bg-gray-100 transition-all">
+                            <button className="px-6 py-3 border-2 border-yellow-500 text-black font-medium rounded-full hover:bg-yellow-500 hover:text-white transition-all">
                                 Mission
                             </button>
-                            <button className="px-6 py-2 border border-gray-300 rounded-full hover:bg-gray-100 transition-all">
+                            <button className="px-6 py-3 border-2 border-yellow-500 text-black font-medium rounded-full hover:bg-yellow-500 hover:text-white transition-all">
                                 Vision
                             </button>
                         </div>
