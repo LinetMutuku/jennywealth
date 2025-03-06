@@ -2,12 +2,6 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import gallery1 from '@/../public/assets/gallery-1.jpeg'
-import gallery2 from '@/../public/assets/gallery-2.jpeg'
-import gallery3 from '@/../public/assets/gallery-3.jpeg'
-import gallery4 from '@/../public/assets/gallery-4.jpeg'
-import gallery5 from '@/../public/assets/gallery-5.jpeg'
-import gallery6 from '@/../public/assets/gallery-6.jpeg'
 import { StaticImageData } from 'next/image';
 
 // Define TypeScript interfaces for our components
