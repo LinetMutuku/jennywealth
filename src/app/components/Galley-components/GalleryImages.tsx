@@ -4,6 +4,25 @@ import React, { useState } from 'react';
 import ShareModal from './ShareModal';
 import GalleryRow from './GalleryRow';
 
+// Define the type for row layouts
+type RowLayoutType = 'two-small-one-big' | 'one-big-two-small';
+
+// Define an interface for image objects
+interface ImageObject {
+    src: string;
+    alt: string;
+}
+
+// Define an interface for gallery row
+interface GalleryRowConfig {
+    layout: RowLayoutType;
+    images: {
+        small1?: ImageObject;
+        small2?: ImageObject;
+        big?: ImageObject;
+    };
+}
+
 const GalleryImages = () => {
     // State for the modal
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -21,7 +40,7 @@ const GalleryImages = () => {
         setSelectedImage(null);
     };
 
-    const galleryRows = [
+    const galleryRows: GalleryRowConfig[] = [
         {
             layout: 'two-small-one-big',
             images: {
