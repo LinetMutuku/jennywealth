@@ -9,7 +9,7 @@ const TestimonialImpact = () => {
         },
         {
             id: 2,
-            number: "500+",
+            number: "200+",
             label: "Successful Events",
         },
         {

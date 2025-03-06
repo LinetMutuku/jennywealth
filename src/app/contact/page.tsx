@@ -14,7 +14,6 @@ export default function ContactPage() {
             <div className="container mx-auto bg-white py-10">
                 <ContactForm />
 
-                {/* Divider with spacing */}
                 <div className="max-w-4xl mx-auto my-16">
                     <div className="border-t border-gray-200"></div>
                 </div>
