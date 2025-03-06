@@ -2,7 +2,14 @@
 
 import React from 'react';
 
-const ShareModal = ({ isOpen, onClose, image }) => {
+// Define the props interface
+interface ShareModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    image: string | null;
+}
+
+const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, image }) => {
     if (!isOpen) return null;
 
     return (
