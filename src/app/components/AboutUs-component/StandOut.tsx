@@ -6,7 +6,7 @@ const StandOut = () => {
         {
             title: "Proven Expertise",
             features: [
-                "Over 500+ successful events delivered.",
+                "Over 200+ successful events delivered.",
                 "A decade of industry experience delivering high-end events."
             ]
         },

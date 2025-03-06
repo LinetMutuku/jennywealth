@@ -16,13 +16,22 @@ const Founder = () => {
                         </p>
                     </div>
 
-                    <div className="w-full md:w-1/2">
-                        {/* Founder image */}
-                        <div className="rounded-lg overflow-hidden shadow-lg">
+                    <div className="w-full md:w-1/2 flex justify-end">
+                        {/* Expanded founder image - only showing Jennifer */}
+                        <div className="rounded-lg overflow-hidden" style={{
+                            width: "100%",
+                            maxWidth: "580px"
+                        }}>
                             <img
                                 src="/assets/founder.jpeg"
                                 alt="Jennifer Ayoola Peters - Founder and CEO"
-                                className="w-full h-full object-cover rounded-lg"
+                                className="w-full object-cover"
+                                style={{
+                                    height: "550px",
+                                    objectPosition: "15% center",
+                                    clipPath: "inset(0 50% 0 0)",
+                                    transform: "scale(1.2)"
+                                }}
                             />
                         </div>
                     </div>
