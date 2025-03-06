@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { StaticImageData } from 'next/image';
 
-// Define TypeScript interfaces for our components
+
 interface GalleryItemProps {
     pictures: string | StaticImageData;
     title: string;

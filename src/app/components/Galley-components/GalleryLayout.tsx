@@ -39,7 +39,6 @@ const GalleryLayout = () => {
                 </div>
             </div>
 
-            {/* Gallery Images - Shows the exact layout from Figma */}
             <GalleryImages />
         </div>
     );

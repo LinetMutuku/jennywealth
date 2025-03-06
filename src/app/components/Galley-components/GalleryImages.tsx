@@ -21,7 +21,6 @@ const GalleryImages = () => {
         setSelectedImage(null);
     };
 
-    // Gallery data organized by rows - with adjusted alt text and metadata for better facial visibility
     const galleryRows = [
         {
             layout: 'two-small-one-big',
