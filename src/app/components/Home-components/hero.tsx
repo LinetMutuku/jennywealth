@@ -4,11 +4,14 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Navbar from '../Navbar';
 
+// Define a type for the button state
+type ButtonType = 'event' | 'gallery' | null;
+
 export default function Hero() {
     const [currentImage, setCurrentImage] = useState('/assets/heroimg.jpeg');
     const [nextImage, setNextImage] = useState('');
     const [transitioning, setTransitioning] = useState(false);
-    const [activeButton, setActiveButton] = useState(null);
+    const [activeButton, setActiveButton] = useState<ButtonType>(null);
     const [animationComplete, setAnimationComplete] = useState(false);
 
     const images = [
