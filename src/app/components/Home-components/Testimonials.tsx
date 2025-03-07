@@ -3,10 +3,21 @@
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 
+// Define type for testimonial ID
+type TestimonialId = number | null;
+
+// Define testimonial interface
+interface Testimonial {
+    id: number;
+    image: string;
+    text: string;
+    name: string;
+}
+
 const Testimonials = () => {
     const [isVisible, setIsVisible] = useState(false);
-    const [activeTestimonial, setActiveTestimonial] = useState(null);
-    const sectionRef = useRef(null);
+    const [activeTestimonial, setActiveTestimonial] = useState<TestimonialId>(null);
+    const sectionRef = useRef<HTMLElement | null>(null);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -30,7 +41,7 @@ const Testimonials = () => {
         };
     }, []);
 
-    const testimonials = [
+    const testimonials: Testimonial[] = [
         {
             id: 1,
             image: "/assets/testimonial-1.jpeg",
