@@ -5,9 +5,9 @@ import { useEffect, useState, useRef } from 'react';
 
 const Services = () => {
     const [isVisible, setIsVisible] = useState(false);
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const sectionRef = useRef(null);
-    const imageRef = useRef(null);
+    const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
+    const sectionRef = useRef<HTMLElement | null>(null);
+    const imageRef = useRef<HTMLDivElement | null>(null);
 
     // Track scroll position for animations
     useEffect(() => {
@@ -33,7 +33,7 @@ const Services = () => {
     }, []);
 
     // Track mouse position for image tilt effect
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         if (imageRef.current) {
             const rect = imageRef.current.getBoundingClientRect();
             const x = (e.clientX - rect.left) / rect.width;
@@ -99,7 +99,7 @@ const Services = () => {
                     {/* Image with interactive effects */}
                     <div
                         ref={imageRef}
-                        className={`relative overflow-hidden rounded shadow-2xl transform transition-all duration-1000 ${
+                        className={`relative overflow-hidden rounded shadow-2xl transform transition-all duration-1000 group ${
                             isVisible ? 'opacity-100 translate-x-0 rotate-0' : 'opacity-0 translate-x-16 rotate-3'
                         }`}
                         onMouseMove={handleMouseMove}
@@ -113,7 +113,7 @@ const Services = () => {
                         <img
                             src="/assets/servicehome.jpeg"
                             alt="Elegant event setting with chandeliers"
-                            className="w-full h-80 object-cover object-center rounded transition-transform duration-700 hover:scale-110"
+                            className="w-full h-80 object-cover object-center rounded transition-transform duration-700 group-hover:scale-110"
                             style={{
                                 objectPosition: "center top",
                                 transform: `perspective(1000px) rotateX(${(mousePosition.y - 0.5) * -5}deg) rotateY(${(mousePosition.x - 0.5) * 5}deg)`
