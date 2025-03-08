@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import GalleryImages from './GalleryImages';
+import { categoryDescriptions } from './galleryConfig'; // Import from your config file
 
 const CATEGORIES = [
     'Weddings',
@@ -42,6 +43,9 @@ const GalleryLayout = () => {
             }, 300);
         }, 300);
     };
+
+    // Get current category description
+    const currentDescription = categoryDescriptions[activeCategory] || categoryDescriptions['Weddings'];
 
     return (
         <div className="w-full bg-white">
@@ -89,8 +93,8 @@ const GalleryLayout = () => {
                             <p className="text-gray-600">Explore our stunning {activeCategory.toLowerCase()} gallery</p>
                         </div>
 
-                        {/* Gallery images component */}
-                        <GalleryImages />
+                        {/* Pass the activeCategory prop to GalleryImages */}
+                        <GalleryImages activeCategory={activeCategory} />
 
                         {/* Category description */}
                         <div className={`
@@ -100,9 +104,7 @@ const GalleryLayout = () => {
                         `}>
                             <h3 className="text-xl font-semibold text-gray-900 mb-2">About our {activeCategory}</h3>
                             <p className="text-gray-700">
-                                Jennywealth Events Management brings creativity and excellence to every {activeCategory.toLowerCase()}.
-                                Our team ensures that each event is tailored to reflect your unique style and preferences,
-                                creating memorable experiences for you and your guests.
+                                {currentDescription}
                             </p>
                         </div>
                     </div>
