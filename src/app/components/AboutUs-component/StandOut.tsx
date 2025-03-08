@@ -1,7 +1,22 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import FeatureCard from './FeatureCard';
 
 const StandOut = () => {
+    const controls = useAnimation();
+    const [ref, inView] = useInView({
+        threshold: 0.2
+    });
+
+    useEffect(() => {
+        if (inView) {
+            controls.start('visible');
+        }
+    }, [controls, inView]);
+
     const features = [
         {
             title: "Proven Expertise",
@@ -47,25 +62,77 @@ const StandOut = () => {
         }
     ];
 
-    return (
-        <div className="py-24 bg-white border-t border-b border-gray-200">
-            <div className="container mx-auto px-4">
-                <h2 className="text-4xl font-bold text-center mb-6 text-black">Why we Stand Out</h2>
-                <p className="text-center max-w-3xl mx-auto mb-16 text-gray-700 text-xl">
-                    We go beyond just event planning—we create flawless experiences that are meticulously tailored to meet your vision. Here's why our clients trust us:
-                </p>
+    const headingVariants = {
+        hidden: { opacity: 0, y: -20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: { duration: 0.6, ease: "easeOut" }
+        }
+    };
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+    const paragraphVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { duration: 0.6, delay: 0.2, ease: "easeOut" }
+        }
+    };
+
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.3
+            }
+        }
+    };
+
+    return (
+        <motion.div
+            className="py-24 bg-white border-t border-b border-gray-200"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8 }}
+        >
+            <div className="container mx-auto px-4" ref={ref}>
+                <motion.h2
+                    className="text-4xl font-bold text-center mb-6 text-black"
+                    variants={headingVariants}
+                    initial="hidden"
+                    animate={controls}
+                >
+                    Why we Stand Out
+                </motion.h2>
+
+                <motion.p
+                    className="text-center max-w-3xl mx-auto mb-16 text-gray-700 text-xl"
+                    variants={paragraphVariants}
+                    initial="hidden"
+                    animate={controls}
+                >
+                    We go beyond just event planning—we create flawless experiences that are meticulously tailored to meet your vision. Here's why our clients trust us:
+                </motion.p>
+
+                <motion.div
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+                    variants={containerVariants}
+                    initial="hidden"
+                    animate={controls}
+                >
                     {features.map((feature, index) => (
                         <FeatureCard
                             key={index}
                             title={feature.title}
                             features={feature.features}
+                            index={index} // Pass index for staggered animations
                         />
                     ))}
-                </div>
+                </motion.div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

@@ -124,7 +124,7 @@ const Navbar = () => {
                         </Link>
                     ))}
                     <Link
-                        href="/book-event"
+                        href="/contact"
                         className={`bg-yellow-400 text-black px-6 py-3 rounded-full font-medium hover:bg-yellow-500 transition-all duration-300 hover:shadow-lg hover:scale-105 mt-4 ${
                             isMenuOpen ? 'animate-slide-in delay-600' : ''
                         } opacity-0`}
