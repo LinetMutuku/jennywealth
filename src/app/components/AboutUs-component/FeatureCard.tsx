@@ -27,7 +27,7 @@ const FeatureCard = ({ title, features, index }: FeatureCardProps) => {
                 className="text-2xl font-semibold mb-6 text-black"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.3, delay: 0.2 + index * 0.1 }}
+                transition={{ duration: 0.1, delay: 0.1 + index * 0.1 }}
             >
                 {title}
             </motion.h3>
