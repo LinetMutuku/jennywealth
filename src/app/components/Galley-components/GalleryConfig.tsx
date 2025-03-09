@@ -396,12 +396,5 @@ export const galleryData: GalleryDataByCategory = {
 };
 
 // Category descriptions
-export const categoryDescriptions: { [key: string]: string } = {
-    'Weddings': 'Jennywealth Events Management brings creativity and excellence to every wedding. Our team ensures that each event is tailored to reflect your unique style and preferences, creating memorable experiences for you and your guests.',
-    'Corporate Events': 'Our corporate event management services deliver professional and impactful business gatherings. From conferences and team-building to product launches and galas, we handle every detail with precision and elegance.',
-    'Birthday Celebrations': 'Make your birthday truly special with our personalized celebration planning. Whether it\'s an intimate gathering or a grand party, we create joyful experiences that celebrate you in style.',
-    'Luxury Dining': 'Experience culinary excellence with our luxury dining events. We combine exquisite food presentation, premium service, and elegant settings to create unforgettable gastronomic journeys for you and your guests.',
-    'Social Events': 'From fundraisers to seasonal celebrations, our social event planning services bring people together in style. We create engaging environments where connections flourish and memories are made.'
-};
 
 export default galleryData;

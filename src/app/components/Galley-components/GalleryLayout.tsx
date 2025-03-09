@@ -1,112 +1,106 @@
 'use client';
-import React, { useState, useEffect } from 'react';
-import GalleryImages from './GalleryImages';
-import { categoryDescriptions } from './GalleryConfig';
 
-const CATEGORIES = [
-    'Weddings',
-    'Corporate Events',
-    'Birthday Celebrations',
-    'Luxury Dining',
-    'Social Events'
-];
+import React, { useState } from 'react';
+import GalleryImages from './GalleryImages';
+import { galleryData } from './GalleryConfig';
+
+// Get all categories from galleryData - ensure they exist
+const CATEGORIES = Object.keys(galleryData || {});
 
 const GalleryLayout = () => {
-    const [activeCategory, setActiveCategory] = useState('Weddings');
+    const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
     const [animationDirection, setAnimationDirection] = useState('right');
 
-    // Function to determine animation direction
-    const determineDirection = (newCategory: string) => {
-        const currentIndex = CATEGORIES.indexOf(activeCategory);
-        const newIndex = CATEGORIES.indexOf(newCategory);
-        return newIndex > currentIndex ? 'right' : 'left';
-    };
+    // Current active category with fallback to prevent "undefined"
+    const activeCategory = CATEGORIES[currentCategoryIndex] || CATEGORIES[0] || 'Weddings';
 
-    // Handle category change with animation
-    const handleCategoryChange = (category: string) => {
-        if (category === activeCategory || isAnimating) return;
+    // Navigation functions with enhanced animation sequence
+    const goToPrevious = () => {
+        if (isAnimating) return;
 
-        // Set animation direction
-        setAnimationDirection(determineDirection(category));
-
-        // Start animation sequence
+        setAnimationDirection('left');
         setIsAnimating(true);
 
-        // Change category after initial animation
         setTimeout(() => {
-            setActiveCategory(category);
+            setCurrentCategoryIndex((prev) =>
+                prev === 0 ? CATEGORIES.length - 1 : prev - 1
+            );
 
-            // End animation sequence
             setTimeout(() => {
                 setIsAnimating(false);
-            }, 300);
+            }, 400);
         }, 300);
     };
 
-    // Get current category description
-    const currentDescription = categoryDescriptions[activeCategory] || categoryDescriptions['Weddings'];
+    const goToNext = () => {
+        if (isAnimating) return;
+
+        setAnimationDirection('right');
+        setIsAnimating(true);
+
+        setTimeout(() => {
+            setCurrentCategoryIndex((prev) =>
+                prev === CATEGORIES.length - 1 ? 0 : prev + 1
+            );
+
+            setTimeout(() => {
+                setIsAnimating(false);
+            }, 400);
+        }, 300);
+    };
 
     return (
         <div className="w-full bg-white">
-            {/* Category tabs with animated indicator */}
-            <div className="w-full max-w-[1240px] mx-auto border-b mb-8 relative">
-                <div className="flex overflow-x-auto">
-                    {CATEGORIES.map((category) => (
+            <div className="w-full max-w-[1240px] mx-auto px-4 relative">
+                {/* Clean, simple header with enhanced styling and animation */}
+                <div className="mt-6 mb-8 flex justify-between items-center">
+                    <div className="animate-fadeIn">
+                        <h2 className="text-3xl font-bold text-gray-900 bg-gradient-to-r from-amber-500 to-amber-700 bg-clip-text text-transparent transition-all duration-500 hover:scale-105 transform">Our Gallery</h2>
+                        <p className="text-gray-600 mt-1 hover:text-amber-600 transition-colors duration-300">Explore our stunning collection</p>
+                    </div>
+
+                    {/* High-visibility navigation controls with enhanced animation and color */}
+                    <div className="flex space-x-2">
                         <button
-                            key={category}
-                            className={`px-6 py-4 text-base font-medium whitespace-nowrap transition-all duration-300 relative ${
-                                activeCategory === category
-                                    ? 'text-[#E0B14B]'
-                                    : 'text-gray-600 hover:text-[#E0B14B]'
-                            }`}
-                            onClick={() => handleCategoryChange(category)}
+                            onClick={goToPrevious}
+                            disabled={isAnimating}
+                            className="w-9 h-9 bg-gradient-to-r from-sky-100 to-blue-200 hover:from-sky-200 hover:to-blue-300 rounded-full
+                                       flex items-center justify-center shadow-lg hover:shadow-blue-100/50
+                                       transition-all duration-300 ease-in-out transform hover:-translate-y-1"
+                            aria-label="Previous images"
                         >
-                            {category}
-                            {activeCategory === category && (
-                                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-[#E0B14B] transform scale-x-100 transition-transform duration-300"></span>
-                            )}
+                            <span className="text-blue-500 text-base font-medium transform transition-transform hover:-translate-x-[1px]">&lt;</span>
                         </button>
-                    ))}
+
+                        <button
+                            onClick={goToNext}
+                            disabled={isAnimating}
+                            className="w-9 h-9 bg-gradient-to-r from-sky-100 to-blue-200 hover:from-sky-200 hover:to-blue-300 rounded-full
+                                       flex items-center justify-center shadow-lg hover:shadow-blue-100/50
+                                       transition-all duration-300 ease-in-out transform hover:-translate-y-1"
+                            aria-label="Next images"
+                        >
+                            <span className="text-blue-500 text-base font-medium transform transition-transform hover:translate-x-[1px]">&gt;</span>
+                        </button>
+                    </div>
                 </div>
 
-                {/* Animated gold underline indicator */}
-                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gray-200"></div>
-            </div>
-
-            {/* Gallery container with animations */}
-            <div className="relative overflow-hidden">
-                <div
-                    className={`
-                        transition-all duration-500 ease-in-out
-                        ${isAnimating
-                        ? animationDirection === 'right'
-                            ? 'opacity-0 transform translate-x-16'
-                            : 'opacity-0 transform -translate-x-16'
-                        : 'opacity-100 transform translate-x-0'
-                    }
-                    `}
-                >
-                    <div className="w-full max-w-[1240px] mx-auto px-4">
-                        <div className="mb-8">
-                            <h2 className="text-3xl font-bold text-gray-900 mb-2">{activeCategory}</h2>
-                            <p className="text-gray-600">Explore our stunning {activeCategory.toLowerCase()} gallery</p>
-                        </div>
-
+                {/* Gallery container with enhanced animations */}
+                <div className="relative overflow-hidden">
+                    <div
+                        className={`
+                            transition-all duration-700 ease-in-out
+                            ${isAnimating
+                            ? animationDirection === 'right'
+                                ? 'opacity-0 transform translate-x-16 rotate-2'
+                                : 'opacity-0 transform -translate-x-16 -rotate-2'
+                            : 'opacity-100 transform translate-x-0 rotate-0'
+                        }
+                        `}
+                    >
                         {/* Pass the activeCategory prop to GalleryImages */}
                         <GalleryImages activeCategory={activeCategory} />
-
-                        {/* Category description */}
-                        <div className={`
-                            mt-12 p-6 bg-gray-50 rounded-lg border-l-4 border-[#E0B14B] shadow-md
-                            transition-all duration-500 ease-in-out
-                            ${isAnimating ? 'opacity-0 transform translate-y-8' : 'opacity-100 transform translate-y-0'}
-                        `}>
-                            <h3 className="text-xl font-semibold text-gray-900 mb-2">About our {activeCategory}</h3>
-                            <p className="text-gray-700">
-                                {currentDescription}
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
