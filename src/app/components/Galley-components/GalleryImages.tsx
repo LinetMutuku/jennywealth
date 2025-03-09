@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import ShareModal from './ShareModal';
 import GalleryRow from './GalleryRow';
-import { galleryData } from './galleryConfig';
+import { galleryData } from './GalleryConfig';
 
 interface GalleryImagesProps {
     activeCategory: string;
