@@ -21,7 +21,6 @@ const GalleryRow: React.FC<GalleryRowProps> = ({
                                                    onShareImage,
                                                    isLastRow = false
                                                }) => {
-    // Pass both image src and full position to parent
     const handleShare = (
         src: string,
         position: { x: number, y: number, width: number, height: number }

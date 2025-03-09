@@ -18,7 +18,7 @@ const GalleryImageItem: React.FC<GalleryImageItemProps> = ({ src, alt, height, o
     // State to track hover effect
     const [isHovered, setIsHovered] = useState(false);
 
-    // Function to get optimal object position based on image content
+
     const getObjectPosition = () => {
         const altText = alt.toLowerCase();
 
