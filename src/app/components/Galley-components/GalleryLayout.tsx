@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import GalleryImages from './GalleryImages';
-import { categoryDescriptions } from './galleryConfig'; // Import from your config file
+import { categoryDescriptions } from './galleryConfig';
 
 const CATEGORIES = [
     'Weddings',

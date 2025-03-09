@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import ShareModal from './ShareModal';
 import GalleryRow from './GalleryRow';
-import { galleryData } from './galleryConfig'; // Import from your config file
+import { galleryData } from './galleryConfig';
 
 interface GalleryImagesProps {
     activeCategory: string;
@@ -13,17 +13,30 @@ const GalleryImages: React.FC<GalleryImagesProps> = ({ activeCategory }) => {
     // State for the modal
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+    const [modalPosition, setModalPosition] = useState<{
+        x: number,
+        y: number,
+        width: number,
+        height: number
+    } | null>(null);
 
-    // Function to handle opening the modal
-    const handleShareImage = (imageSrc: string) => {
-        setSelectedImage(imageSrc);
+    // Handle share with image center position tracking
+    const handleShareImage = (
+        src: string,
+        position: { x: number, y: number, width: number, height: number }
+    ) => {
+        setSelectedImage(src);
+        setModalPosition(position);
         setIsModalOpen(true);
     };
 
     // Function to handle closing the modal
     const closeShareModal = () => {
         setIsModalOpen(false);
-        setSelectedImage(null);
+        setTimeout(() => {
+            setModalPosition(null);
+            setSelectedImage(null);
+        }, 200);
     };
 
     // Get gallery rows for active category (fallback to Weddings if category doesn't exist)
@@ -31,11 +44,12 @@ const GalleryImages: React.FC<GalleryImagesProps> = ({ activeCategory }) => {
 
     return (
         <div className="w-full max-w-[1240px] mx-auto px-4 py-8">
-            {/* Share Modal */}
+            {/* Share Modal with image center position */}
             <ShareModal
                 isOpen={isModalOpen}
                 onClose={closeShareModal}
                 image={selectedImage}
+                position={modalPosition}
             />
 
             {/* Gallery Rows */}

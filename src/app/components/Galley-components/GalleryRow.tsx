@@ -11,12 +11,23 @@ type GalleryRowProps = {
         small2: { src: string; alt: string };
         big: { src: string; alt: string };
     };
-    onShareImage: (src: string) => void;
+    onShareImage: (src: string, position: { x: number, y: number, width: number, height: number }) => void;
     isLastRow?: boolean;
 };
 
-const GalleryRow: React.FC<GalleryRowProps> = ({layout, images, onShareImage, isLastRow = false
+const GalleryRow: React.FC<GalleryRowProps> = ({
+                                                   layout,
+                                                   images,
+                                                   onShareImage,
+                                                   isLastRow = false
                                                }) => {
+    // Pass both image src and full position to parent
+    const handleShare = (
+        src: string,
+        position: { x: number, y: number, width: number, height: number }
+    ) => {
+        onShareImage(src, position);
+    };
 
     const getOptimalHeight = (imageType: 'small' | 'big', alt: string) => {
         const altText = alt.toLowerCase();
@@ -37,7 +48,6 @@ const GalleryRow: React.FC<GalleryRowProps> = ({layout, images, onShareImage, is
             if (altText.includes('men') || altText.includes('man') || altText.includes('groom')) {
                 return "h-[250px]";
             }
-
 
             return "h-[220px]";
         } else {
@@ -69,13 +79,13 @@ const GalleryRow: React.FC<GalleryRowProps> = ({layout, images, onShareImage, is
                             src={images.small1.src}
                             alt={images.small1.alt}
                             height={getOptimalHeight('small', images.small1.alt)}
-                            onShare={onShareImage}
+                            onShare={handleShare}
                         />
                         <GalleryImageItem
                             src={images.small2.src}
                             alt={images.small2.alt}
                             height={getOptimalHeight('small', images.small2.alt)}
-                            onShare={onShareImage}
+                            onShare={handleShare}
                         />
                     </div>
                     <div className="md:col-span-6">
@@ -83,7 +93,7 @@ const GalleryRow: React.FC<GalleryRowProps> = ({layout, images, onShareImage, is
                             src={images.big.src}
                             alt={images.big.alt}
                             height={getOptimalHeight('big', images.big.alt)}
-                            onShare={onShareImage}
+                            onShare={handleShare}
                         />
                     </div>
                 </>
@@ -94,7 +104,7 @@ const GalleryRow: React.FC<GalleryRowProps> = ({layout, images, onShareImage, is
                             src={images.big.src}
                             alt={images.big.alt}
                             height={getOptimalHeight('big', images.big.alt)}
-                            onShare={onShareImage}
+                            onShare={handleShare}
                         />
                     </div>
                     <div className="md:col-span-6 grid grid-rows-2 gap-6">
@@ -102,13 +112,13 @@ const GalleryRow: React.FC<GalleryRowProps> = ({layout, images, onShareImage, is
                             src={images.small1.src}
                             alt={images.small1.alt}
                             height={getOptimalHeight('small', images.small1.alt)}
-                            onShare={onShareImage}
+                            onShare={handleShare}
                         />
                         <GalleryImageItem
                             src={images.small2.src}
                             alt={images.small2.alt}
                             height={getOptimalHeight('small', images.small2.alt)}
-                            onShare={onShareImage}
+                            onShare={handleShare}
                         />
                     </div>
                 </>

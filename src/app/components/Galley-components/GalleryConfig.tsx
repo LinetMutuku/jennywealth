@@ -188,7 +188,7 @@ export const galleryData: GalleryDataByCategory = {
             layout: 'two-small-one-big',
             images: {
                 small1: {
-                    src: '/assets/birthday-cake.png',
+                    src: '/assets/birthday-dinner.png',
                     alt: 'Elaborately decorated birthday cake'
                 },
                 small2: {
@@ -209,11 +209,11 @@ export const galleryData: GalleryDataByCategory = {
                     alt: 'Decorated venue for birthday celebration'
                 },
                 small1: {
-                    src: '/assets/birthday-toast.png',
+                    src: '/assets/social-drinks.png',
                     alt: 'Birthday toast celebration with champagne'
                 },
                 small2: {
-                    src: '/assets/birthday-gifts.png',
+                    src: '/assets/birthday-setup.png',
                     alt: 'Wrapped birthday gifts and presents'
                 }
             }
@@ -222,7 +222,7 @@ export const galleryData: GalleryDataByCategory = {
             layout: 'two-small-one-big',
             images: {
                 small1: {
-                    src: '/assets/birthday-balloons.png',
+                    src: '/assets/birthday-chef.png',
                     alt: 'Colorful balloon arrangements for birthday'
                 },
                 small2: {
@@ -243,11 +243,11 @@ export const galleryData: GalleryDataByCategory = {
                     alt: 'Entertainment performance at birthday celebration'
                 },
                 small1: {
-                    src: '/assets/birthday-kid.png',
+                    src: '/assets/birthday-invite.png',
                     alt: 'Child celebrating birthday with friends'
                 },
                 small2: {
-                    src: '/assets/birthday-adult.png',
+                    src: '/assets/social-charity.png',
                     alt: 'Adult milestone birthday celebration'
                 }
             }
@@ -262,7 +262,7 @@ export const galleryData: GalleryDataByCategory = {
                     alt: 'Luxury table setting with fine china'
                 },
                 small2: {
-                    src: '/assets/luxury-wine.png',
+                    src: '/assets/luxury-service.png',
                     alt: 'Premium wine selection for luxury dining'
                 },
                 big: {
@@ -279,11 +279,11 @@ export const galleryData: GalleryDataByCategory = {
                     alt: 'Gourmet luxury food presentation'
                 },
                 small1: {
-                    src: '/assets/luxury-chef.png',
+                    src: '/assets/birthday-theme.png',
                     alt: 'Private chef preparing luxury dining experience'
                 },
                 small2: {
-                    src: '/assets/luxury-dessert.png',
+                    src: '/assets/luxury-seating.png',
                     alt: 'Elegant dessert presentation for luxury dining'
                 }
             }
@@ -328,11 +328,11 @@ export const galleryData: GalleryDataByCategory = {
             layout: 'two-small-one-big',
             images: {
                 small1: {
-                    src: '/assets/social-cocktail.png',
+                    src: '/assets/social-dance.png',
                     alt: 'Cocktail reception at social gathering'
                 },
                 small2: {
-                    src: '/assets/social-networking.png',
+                    src: '/assets/social-cocktails.png',
                     alt: 'Guests networking at social event'
                 },
                 big: {
@@ -353,7 +353,7 @@ export const galleryData: GalleryDataByCategory = {
                     alt: 'Live music performance at social gathering'
                 },
                 small2: {
-                    src: '/assets/social-dance.png',
+                    src: '/assets/social-interaction.png',
                     alt: 'Dance floor at social event'
                 }
             }

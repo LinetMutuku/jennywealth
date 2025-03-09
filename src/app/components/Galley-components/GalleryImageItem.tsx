@@ -1,21 +1,24 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 type GalleryImageItemProps = {
     src: string;
     alt: string;
     height: string;
-    onShare: (src: string) => void;
+    onShare: (src: string, position: { x: number, y: number, width: number, height: number }) => void;
 };
 
 const GalleryImageItem: React.FC<GalleryImageItemProps> = ({ src, alt, height, onShare }) => {
+    // Reference to the image container
+    const imageContainerRef = useRef<HTMLDivElement>(null);
+
     // State to track if image is loaded
     const [imageLoaded, setImageLoaded] = useState(true);
 
     // State to track hover effect
     const [isHovered, setIsHovered] = useState(false);
 
-    // Get optimal object position based on image content
+    // Function to get optimal object position based on image content
     const getObjectPosition = () => {
         const altText = alt.toLowerCase();
 
@@ -35,15 +38,40 @@ const GalleryImageItem: React.FC<GalleryImageItemProps> = ({ src, alt, height, o
             return 'center 20%';
         }
 
-        if (altText.includes('setup') || altText.includes('table') || altText.includes('reception')) {
-            return 'center center';
+        if (altText.includes('corporate')) {
+            return 'center 25%';
         }
 
-        return 'center';
+        if (altText.includes('setup') || altText.includes('table') || altText.includes('reception')) {
+            return 'center 40%';
+        }
+
+        // Default position for other images
+        return 'center 30%';
+    };
+
+    // Share handler with full image position tracking
+    const handleShare = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Get the entire image container position to center the modal on the image
+        if (imageContainerRef.current) {
+            const imageRect = imageContainerRef.current.getBoundingClientRect();
+            const imagePosition = {
+                x: imageRect.left,
+                y: imageRect.top,
+                width: imageRect.width,
+                height: imageRect.height
+            };
+
+            onShare(src, imagePosition);
+        }
     };
 
     return (
         <div
+            ref={imageContainerRef}
             className={`rounded-lg overflow-hidden ${height} shadow-md group relative transform transition duration-300 hover:scale-[1.01]`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -67,9 +95,9 @@ const GalleryImageItem: React.FC<GalleryImageItemProps> = ({ src, alt, height, o
                 }`}
             ></div>
 
-            {/* Arrow share button - using arrow icon */}
+            {/* Share button - tracks entire image position */}
             <button
-                onClick={() => onShare(src)}
+                onClick={handleShare}
                 aria-label="Share this image"
                 className={`absolute bottom-4 right-4 bg-white/90 p-2.5 rounded-full shadow-lg transition-all duration-300 transform ${
                     isHovered ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
@@ -82,11 +110,13 @@ const GalleryImageItem: React.FC<GalleryImageItemProps> = ({ src, alt, height, o
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="#E0B14B"
-                    strokeWidth="2"
+                    strokeWidth="2.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                 >
-                    <path d="M7 17l9.2-9.2M17 17V7H7"></path>
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
                 </svg>
             </button>
         </div>
