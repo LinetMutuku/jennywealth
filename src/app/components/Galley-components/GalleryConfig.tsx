@@ -160,7 +160,7 @@ export const galleryData: GalleryDataByCategory = {
                     alt: 'Corporate team building activities'
                 },
                 big: {
-                    src: '/assets/corporate-exhibition.png',
+                    src: '/assets/couplephoto.png',
                     alt: 'Corporate exhibition with product displays'
                 }
             }
@@ -169,15 +169,15 @@ export const galleryData: GalleryDataByCategory = {
             layout: 'one-big-two-small',
             images: {
                 big: {
-                    src: '/assets/corporate-speech.png',
+                    src: '/assets/weddingcouple.png',
                     alt: 'Elegant corporate dinner arrangement'
                 },
                 small1: {
-                    src: '/assets/corporate-speaker.png',
+                    src: '/assets/corporate-speech.png',
                     alt: 'Keynote speaker at corporate event'
                 },
                 small2: {
-                    src: '/assets/corporate-members.png',
+                    src: '/assets/corporate-exhibition.png',
                     alt: 'Corporate event reception area'
                 }
             }
