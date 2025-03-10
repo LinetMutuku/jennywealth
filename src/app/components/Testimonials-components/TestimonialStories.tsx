@@ -52,10 +52,10 @@ const TestimonialStories = () => {
         }
     };
 
-    // Star rating animation
+    // Star rating animation with proper TypeScript type
     const starVariants = {
         hidden: { scale: 0, rotate: -30 },
-        visible: i => ({
+        visible: (i: number) => ({
             scale: 1,
             rotate: 0,
             transition: {
@@ -67,8 +67,16 @@ const TestimonialStories = () => {
         })
     };
 
+    // Define testimonial content props interface
+    interface TestimonialProps {
+        imgSrc: string;
+        imgAlt: string;
+        content: React.ReactNode;
+        isFirst: boolean;
+    }
+
     // Testimonial component with enhanced animations
-    const Testimonial = ({ imgSrc, imgAlt, content, isFirst }) => (
+    const Testimonial: React.FC<TestimonialProps> = ({ imgSrc, imgAlt, content, isFirst }) => (
         <motion.div
             className={`rounded-xl overflow-hidden shadow-xl bg-white transition-all duration-300 hover:shadow-2xl border border-gray-100 ${isFirst ? 'md:mr-4' : 'md:ml-4'}`}
             initial="hidden"
@@ -238,7 +246,6 @@ const TestimonialStories = () => {
     return (
         <section className="py-16 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
                     <Testimonial
                         imgSrc="/assets/corporate-speaker.png"
