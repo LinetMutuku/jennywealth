@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 
 const Services = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
@@ -13,7 +13,7 @@ const Services = () => {
     }
 
     // Track mouse position for image tilt effect
-    const handleMouseMove = (e) => {
+    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
         const rect = e.currentTarget.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width;
         const y = (e.clientY - rect.top) / rect.height;
