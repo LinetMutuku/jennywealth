@@ -86,7 +86,7 @@ export const galleryData: GalleryDataByCategory = {
                     alt: 'Elegant corporate dinner arrangement'
                 },
                 small1: {
-                    src: '/assets/servicehome.png',
+                    src: '/assets/wedding-stage.png',
                     alt: 'Keynote speaker at corporate event'
                 },
                 small2: {
