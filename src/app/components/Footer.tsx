@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
                         <ul className="space-y-2">
                             <li>Phone: +234 802 340 0654</li>
                             <li>Email: info@jennywealth.com</li>
-                            <li>Address: 45B Lekki Phase 1, Lagos, Nigeria</li>
+                            <li>Address: House B1, imperial Oak Estate, inside Royal pine estate, Orchid road, Lekki</li>
                         </ul>
                     </div>
                 </div>
