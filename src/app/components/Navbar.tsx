@@ -74,7 +74,7 @@ const Navbar = () => {
 
                 {/* Book an Event Button with animation */}
                 <Link
-                    href="/book-event"
+                    href="/contact"
                     className="hidden md:block bg-yellow-400 text-black px-6 py-3 rounded-full font-medium transition-all duration-300 hover:bg-yellow-500 hover:shadow-lg hover:shadow-yellow-400/30 hover:-translate-y-1 transform"
                 >
                     Book an Event
