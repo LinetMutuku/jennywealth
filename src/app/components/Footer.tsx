@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
                             />
                         </div>
                         <Link
-                            href="/plan-event"
+                            href="/contact"
                             className="bg-yellow-400 text-black px-6 py-2 rounded-full font-medium hover:bg-yellow-500 transition-colors"
                         >
                             Plan Your Event
