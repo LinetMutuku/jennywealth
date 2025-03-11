@@ -275,7 +275,7 @@ export const galleryData: GalleryDataByCategory = {
             layout: 'two-small-one-big',
             images: {
                 small1: {
-                    src: '/assets/social-setup.png',
+                    src: '/assets/wedding-seating.png',
                     alt: 'Social event venue setup'
                 },
                 small2: {
