@@ -18,7 +18,7 @@ const CTA = () => {
                             Let's Plan Your Perfect Event
                         </h2>
                         <p className="text-gray-700 mb-8">
-                            Your dream event starts here! From elegant weddings to grand galas, we bring your vision to life with seamless planning and unforgettable details. Let's make magic together.
+                            With over 10 years of industry experience, we specialize in curating unique event experiences that leave lasting memories. From corporate gatherings to opulent weddings of luxurious taste, we ensure precision in every detail.
                         </p>
 
                         <Link
