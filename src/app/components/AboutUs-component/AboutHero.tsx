@@ -11,6 +11,7 @@ const AboutHero = () => {
     });
 
     useEffect(() => {
+        console.log("hey")
         if (inView) {
             controls.start('visible');
         } else {

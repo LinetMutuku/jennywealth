@@ -10,6 +10,7 @@ const Navbar = () => {
 
     // Handle scroll effect for navbar background
     useEffect(() => {
+        console.log("whatsup")
         const handleScroll = () => {
             if (window.scrollY > 50) {
                 setIsScrolled(true);

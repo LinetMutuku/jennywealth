@@ -1,6 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ContactForm = () => {
     const [formData, setFormData] = useState({
@@ -13,29 +16,48 @@ const ContactForm = () => {
         moreDetails: ''
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission - replace with your API call
-        console.log('Form submitted:', formData);
-        // Reset form or show success message
-        alert('Inquiry sent successfully!');
-        setFormData({
-            fullName: '',
-            email: '',
-            phone: '',
-            eventType: '',
-            eventDate: '',
-            eventLocation: '',
-            moreDetails: ''
-        });
+
+        console.log(formData)
+
+        emailjs.send("service_qoo96qh", "template_hon8msd", formData, "1-CU-DYpyk8LutU6r")
+            .then((response) => {
+                console.log("SUCCESS!", response.status, response.text);
+                toast.success("Message sent successfully!", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+                setFormData({
+                    fullName: "",
+                    email: "",
+                    phone: "",
+                    eventType: "",
+                    eventDate: "",
+                    eventLocation: "",
+                    moreDetails: ""
+                });
+            }, (err) => {
+                console.log("FAILED...", err);
+                toast.error("Message failed to send. Please try again later.", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            });
     };
 
     return (
@@ -101,7 +123,7 @@ const ContactForm = () => {
                                 name="eventType"
                                 value={formData.eventType}
                                 onChange={handleChange}
-                                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition-all"
+                                className="w-full p-3 border border-gray-300 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition-all"
                             />
                         </div>
                     </div>
@@ -117,7 +139,7 @@ const ContactForm = () => {
                                 name="eventDate"
                                 value={formData.eventDate}
                                 onChange={handleChange}
-                                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition-all"
+                                className="w-full p-3 border border-gray-300 text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition-all"
                             />
                         </div>
 
@@ -131,7 +153,7 @@ const ContactForm = () => {
                                 name="eventLocation"
                                 value={formData.eventLocation}
                                 onChange={handleChange}
-                                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition-all"
+                                className="w-full p-3 border border-gray-300 text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition-all"
                             />
                         </div>
                     </div>
@@ -146,7 +168,7 @@ const ContactForm = () => {
                             rows={5}
                             value={formData.moreDetails}
                             onChange={handleChange}
-                            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition-all"
+                            className="w-full p-3 border border-gray-300 text-black rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-amber-300 transition-all"
                             placeholder="Tell us more about your event vision..."
                         ></textarea>
                     </div>
@@ -159,6 +181,18 @@ const ContactForm = () => {
                     </button>
                 </form>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
         </div>
     );
 };
