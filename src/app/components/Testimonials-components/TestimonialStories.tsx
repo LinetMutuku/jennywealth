@@ -138,7 +138,7 @@ const TestimonialStories = () => {
                 viewport={{ once: true }}
             >
                 <motion.p className="text-gray-700 leading-relaxed" variants={itemVariants}>
-                    Hello everyone, my name is Ola Peters Awomolo, CEO of Discoe Properties Limited and privileged to be the President of EMBA27 class of Lagos Business School.
+                    Hello everyone, my name is Ola Peters Awomolo, MD.Briscoe Properties Limited and privileged to be the President of EMBA27 class of Lagos Business School.
                 </motion.p>
                 <motion.p className="text-gray-700 leading-relaxed" variants={itemVariants}>
                     I am delighted to provide this glowing review for Jennywealth Honeybees Events, who expertly planned our EMBA27 class graduation party in December 2024.
@@ -159,7 +159,7 @@ const TestimonialStories = () => {
             >
                 <div className="flex flex-col">
                     <p className="font-semibold text-gray-900">Ola Peters Awomolo</p>
-                    <p className="text-sm text-gray-600">CEO, Discoe Properties Limited</p>
+                    <p className="text-sm text-gray-600">MD.Briscoe Properties Limited</p>
                 </div>
                 <div className="ml-auto">
                     <div className="flex items-center">
