@@ -1,64 +1,37 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, MouseEvent } from 'react';
+import { useState, useEffect } from 'react';
 
 const Services = () => {
-    const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
-    const [isClient, setIsClient] = useState(false);
+    const [mounted, setMounted] = useState(false);
 
-    // Set isClient to true on client-side render
-    if (typeof window !== 'undefined' && !isClient) {
-        setIsClient(true);
-    }
-
-    // Track mouse position for image tilt effect
-    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width;
-        const y = (e.clientY - rect.top) / rect.height;
-
-        setMousePosition({ x, y });
-    };
-
-    // Reset image position when mouse leaves
-    const handleMouseLeave = () => {
-        setMousePosition({ x: 0.5, y: 0.5 });
-    };
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     return (
-        <section
-            className="py-20 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden"
-        >
-            {/* Animated background elements */}
+        <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden">
+            {/* Simplified background elements - removed animations */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-                <div className="absolute top-20 left-10 w-64 h-64 bg-yellow-400/10 rounded-full mix-blend-multiply filter blur-xl animate-float-slow"></div>
-                <div className="absolute bottom-10 right-10 w-80 h-80 bg-yellow-400/5 rounded-full mix-blend-multiply filter blur-xl animate-float-medium"></div>
-                <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-gray-200/20 rounded-full mix-blend-multiply filter blur-lg animate-float-fast"></div>
+                <div className="absolute top-20 left-10 w-64 h-64 bg-yellow-400/10 rounded-full mix-blend-multiply filter blur-xl"></div>
+                <div className="absolute bottom-10 right-10 w-80 h-80 bg-yellow-400/5 rounded-full mix-blend-multiply filter blur-xl"></div>
             </div>
 
             <div className="container mx-auto px-4 relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                    {/* Text content with animations */}
-                    <div className={`transform transition-all duration-1000 ${
-                        isClient ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-16'
-                    }`}>
+                    {/* Text content with simplified animations */}
+                    <div className={mounted ? "opacity-100" : "opacity-0"}>
                         <h2 className="text-3xl md:text-4xl font-serif mb-6 text-black relative inline-block">
                             <span className="relative z-10">Our Expert Event Management Services</span>
-                            <span className={`absolute bottom-0 left-0 h-1 bg-yellow-400 transition-all duration-1000 ease-out delay-700 ${
-                                isClient ? 'w-full' : 'w-0'
-                            }`}></span>
+                            <span className={mounted ? "absolute bottom-0 left-0 h-1 bg-yellow-400 w-full" : "absolute bottom-0 left-0 h-1 bg-yellow-400 w-0"}></span>
                         </h2>
 
-                        <p className={`text-gray-700 mb-8 transition-all duration-700 delay-300 ${
-                            isClient ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                        }`}>
+                        <p className={mounted ? "text-gray-700 mb-8" : "text-gray-700 mb-8 opacity-0"}>
                             We handle every detail, from event conceptualization and budget planning to venue coordination, décor, and on-site management, ensuring a seamless and unforgettable experience.
                         </p>
 
-                        <div className={`relative transition-all duration-700 delay-500 ${
-                            isClient ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                        }`}>
+                        <div className={mounted ? "" : "opacity-0"}>
                             <Link
                                 href="/services"
                                 className="relative inline-block bg-yellow-400 text-black px-8 py-3 rounded-full font-medium overflow-hidden group"
@@ -67,33 +40,49 @@ const Services = () => {
                                     View Our Services
                                 </span>
                                 <span className="absolute top-0 left-0 w-full h-full bg-yellow-500 transform scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100"></span>
-                                <span className="absolute -top-1 -right-1 w-8 h-8 bg-yellow-300 rounded-full scale-0 transition-transform duration-500 group-hover:scale-100 delay-100"></span>
-                                <span className="absolute -bottom-2 -left-2 w-6 h-6 bg-yellow-300 rounded-full scale-0 transition-transform duration-500 group-hover:scale-100 delay-200"></span>
                             </Link>
                         </div>
                     </div>
 
-                    {/* Image with interactive effects */}
+                    {/* Image with restored interactive effects */}
                     <div
                         className={`relative overflow-hidden rounded shadow-2xl transform transition-all duration-1000 group ${
-                            isClient ? 'opacity-100 translate-x-0 rotate-0' : 'opacity-0 translate-x-16 rotate-3'
+                            mounted ? 'opacity-100 translate-x-0 rotate-0' : 'opacity-0 translate-x-16 rotate-3'
                         }`}
-                        onMouseMove={handleMouseMove}
-                        onMouseLeave={handleMouseLeave}
+                        onMouseMove={(e) => {
+                            if (!mounted) return;
+                            const rect = e.currentTarget.getBoundingClientRect();
+                            const x = (e.clientX - rect.left) / rect.width;
+                            const y = (e.clientY - rect.top) / rect.height;
+
+                            // Apply the transform to the image directly
+                            const img = e.currentTarget.querySelector('img');
+                            if (img) {
+                                img.style.transform = `perspective(1000px) rotateX(${(y - 0.5) * -5}deg) rotateY(${(x - 0.5) * 5}deg)`;
+                            }
+                        }}
+                        onMouseLeave={(e) => {
+                            // Reset transform on mouse leave
+                            const img = e.currentTarget.querySelector('img');
+                            if (img) {
+                                img.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+                            }
+                        }}
                     >
                         <div className="absolute inset-0 bg-gradient-to-tr from-yellow-400/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
 
                         {/* Animated overlay with shimmer effect */}
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full animate-shimmer-slow z-20 pointer-events-none"></div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full z-20 pointer-events-none"
+                             style={{ animation: mounted ? 'shimmer 3s infinite' : 'none' }}></div>
 
+                        {/* Use Next.js Image for optimization */}
                         <img
                             src="/assets/servicehome.jpeg"
                             alt="Elegant event setting with chandeliers"
                             className="w-full h-80 object-cover object-center rounded transition-transform duration-700 group-hover:scale-110"
-                            style={{
-                                objectPosition: "center top",
-                                transform: `perspective(1000px) rotateX(${(mousePosition.y - 0.5) * -5}deg) rotateY(${(mousePosition.x - 0.5) * 5}deg)`
-                            }}
+                            style={{ objectPosition: "center top" }}
+                            width={600}
+                            height={320}
                         />
 
                         {/* Decorative corner elements */}
@@ -103,7 +92,7 @@ const Services = () => {
                 </div>
             </div>
 
-            {/* Custom animation styles */}
+            {/* Add back selected animation styles */}
             <style jsx global>{`
                 @keyframes shimmer {
                     0% {
@@ -114,50 +103,7 @@ const Services = () => {
                     }
                 }
                 
-                .animate-shimmer-slow {
-                    animation: shimmer 3s infinite;
-                }
-                
-                @keyframes floatSlow {
-                    0%, 100% {
-                        transform: translateY(0) translateX(0);
-                    }
-                    50% {
-                        transform: translateY(-20px) translateX(10px);
-                    }
-                }
-                
-                .animate-float-slow {
-                    animation: floatSlow 20s infinite ease-in-out;
-                }
-                
-                @keyframes floatMedium {
-                    0%, 100% {
-                        transform: translateY(0) translateX(0);
-                    }
-                    50% {
-                        transform: translateY(-15px) translateX(-15px);
-                    }
-                }
-                
-                .animate-float-medium {
-                    animation: floatMedium 15s infinite ease-in-out;
-                }
-                
-                @keyframes floatFast {
-                    0%, 100% {
-                        transform: translateY(0) translateX(0);
-                    }
-                    50% {
-                        transform: translateY(-25px) translateX(15px);
-                    }
-                }
-                
-                .animate-float-fast {
-                    animation: floatFast 12s infinite ease-in-out;
-                }
-                
-                /* Accessibility considerations */
+                /* Disable animations for users who prefer reduced motion */
                 @media (prefers-reduced-motion: reduce) {
                     .animate-shimmer-slow,
                     .animate-float-slow,
