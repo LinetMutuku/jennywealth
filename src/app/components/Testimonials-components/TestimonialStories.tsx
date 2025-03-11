@@ -282,7 +282,7 @@ const TestimonialStories = () => {
                 viewport={{ once: true }}
             >
                 <div className="flex flex-col">
-                    <p className="font-semibold text-gray-900">Satisfied Couple</p>
+                    <p className="font-semibold text-gray-900">Mrs and Mrs Dotun</p>
                     <p className="text-sm text-gray-600">Lagos, Nigeria</p>
                 </div>
                 <div className="ml-auto">
