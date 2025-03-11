@@ -65,7 +65,7 @@ export const galleryData: GalleryDataByCategory = {
             layout: 'two-small-one-big',
             images: {
                 small1: {
-                    src: '/assets/corporate-setup.png',
+                    src: '/assets/reception-tables-1.png',
                     alt: 'Corporate event venue setup'
                 },
                 small2: {
@@ -86,7 +86,7 @@ export const galleryData: GalleryDataByCategory = {
                     alt: 'Elegant corporate dinner arrangement'
                 },
                 small1: {
-                    src: '/assets/corporate-speech.png',
+                    src: '/assets/servicehome.png',
                     alt: 'Keynote speaker at corporate event'
                 },
                 small2: {
