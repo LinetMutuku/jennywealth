@@ -4,14 +4,9 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 const Services = () => {
-    // We'll use this approach to detect client-side rendering without useEffect
-    // This works because the initial state is false, then the component re-renders once on client
-    const [hasMounted, setHasMounted] = useState(false);
 
-    // This will trigger once after initial render (only on client-side)
+    const [hasMounted, setHasMounted] = useState(false);
     if (!hasMounted && typeof window !== 'undefined') {
-        // Schedule the state update for the next microtask to avoid React warnings
-        // This is more performant than useEffect for this specific use case
         Promise.resolve().then(() => setHasMounted(true));
     }
 
@@ -142,8 +137,6 @@ const Services = () => {
                         transform: translateX(100%);
                     }
                 }
-                
-                /* Accessibility - disable animations for users who prefer reduced motion */
                 @media (prefers-reduced-motion: reduce) {
                     .shimmer-effect {
                         animation: none !important;

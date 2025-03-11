@@ -34,8 +34,6 @@ const BudgetManagement = () => {
                     return null; // Return null to avoid rendering anything
                 })()
             )}
-
-            {/* Image Section with reveal animation */}
             <div
                 className={`w-full md:w-1/2 overflow-hidden rounded-lg transform transition-all duration-1000 ease-out ${
                     isVisible
