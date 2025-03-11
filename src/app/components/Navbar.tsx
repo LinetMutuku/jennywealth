@@ -1,32 +1,25 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
     const [activeLink, setActiveLink] = useState('');
 
-    // Handle scroll effect for navbar background
-    useEffect(() => {
-        console.log("whatsup")
-        const handleScroll = () => {
-            if (window.scrollY > 50) {
-                setIsScrolled(true);
-            } else {
-                setIsScrolled(false);
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     return (
-        <nav className={`w-full px-6 py-4 fixed top-0 z-40 transition-all duration-500 ${
-            isScrolled ? 'bg-gray-900/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
-        }`}>
+        <nav
+            className={`w-full px-6 py-4 fixed top-0 z-40 transition-all duration-500 ${
+                typeof window !== 'undefined' && window.scrollY > 50 ? 'bg-gray-900/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
+            }`}
+            onScroll={() => {}}
+            style={{
+                backgroundColor: typeof window !== 'undefined' && window.scrollY > 50 ? 'rgba(17, 24, 39, 0.95)' : 'transparent',
+                backdropFilter: typeof window !== 'undefined' && window.scrollY > 50 ? 'blur(4px)' : 'none',
+                boxShadow: typeof window !== 'undefined' && window.scrollY > 50 ? '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)' : 'none'
+            }}
+        >
             <div className="container mx-auto flex justify-between items-center">
                 {/* Logo and Brand Name with animation */}
                 <Link href="/" className="z-50 flex items-center space-x-3 group">
@@ -177,6 +170,22 @@ const Navbar = () => {
                     animation-delay: 600ms;
                 }
             `}</style>
+
+            {/* Script to handle scroll without useEffect */}
+            <script dangerouslySetInnerHTML={{
+                __html: `
+                    document.addEventListener('scroll', function() {
+                        const nav = document.querySelector('nav');
+                        if (window.scrollY > 50) {
+                            nav.classList.add('bg-gray-900/95', 'backdrop-blur-sm', 'shadow-lg');
+                            nav.classList.remove('bg-transparent');
+                        } else {
+                            nav.classList.remove('bg-gray-900/95', 'backdrop-blur-sm', 'shadow-lg');
+                            nav.classList.add('bg-transparent');
+                        }
+                    });
+                `
+            }} />
         </nav>
     );
 };

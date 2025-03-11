@@ -1,23 +1,9 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const ContactHero = () => {
-    const controls = useAnimation();
-    const [ref, inView] = useInView({
-        threshold: 0.2
-    });
-
-    useEffect(() => {
-        if (inView) {
-            controls.start('visible');
-        } else {
-            controls.start('hidden');
-        }
-    }, [controls, inView]);
-
     // Text reveal animation
     const textVariants = {
         hidden: { opacity: 0 },
@@ -50,7 +36,6 @@ const ContactHero = () => {
     return (
         <div>
             <motion.div
-                ref={ref}
                 className="relative w-full h-[55vh] md:h-[65vh] overflow-hidden"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -109,7 +94,8 @@ const ContactHero = () => {
                         className="text-6xl md:text-7xl font-serif"
                         variants={textVariants}
                         initial="hidden"
-                        animate={controls}
+                        whileInView="visible"
+                        viewport={{ once: false, amount: 0.2 }}
                     >
                         {"Contact Us".split('').map((char, index) => (
                             <motion.span
@@ -126,7 +112,8 @@ const ContactHero = () => {
                     <motion.div
                         className="h-1 bg-white rounded-full mx-auto mt-4"
                         initial={{ width: 0 }}
-                        animate={{ width: "150px" }}
+                        whileInView={{ width: "150px" }}
+                        viewport={{ once: false, amount: 0.2 }}
                         transition={{
                             delay: 1.2,
                             duration: 0.8,
@@ -139,7 +126,8 @@ const ContactHero = () => {
                 <motion.div
                     className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black to-transparent"
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: 0.5 }}
+                    whileInView={{ opacity: 0.5 }}
+                    viewport={{ once: false, amount: 0.2 }}
                     transition={{ delay: 1.6, duration: 1 }}
                 />
             </motion.div>
@@ -147,14 +135,16 @@ const ContactHero = () => {
             <motion.div
                 className="bg-white py-14 text-center"
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, amount: 0.2 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
             >
                 <div className="max-w-4xl mx-auto px-4">
                     <motion.h2
                         className="text-3xl md:text-4xl font-serif mb-6 text-gray-800"
                         initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: false, amount: 0.2 }}
                         transition={{ duration: 0.8, delay: 0.8 }}
                     >
                         Let's Make Your Dream Event a Reality
@@ -162,7 +152,8 @@ const ContactHero = () => {
                     <motion.p
                         className="text-base md:text-lg max-w-3xl mx-auto text-gray-700"
                         initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: false, amount: 0.2 }}
                         transition={{ duration: 0.8, delay: 1.1 }}
                     >
                         We're excited to hear about your event! Reach out to us,

@@ -8,47 +8,10 @@ import { galleryData } from './GalleryConfig';
 const CATEGORIES = Object.keys(galleryData || {});
 
 const GalleryLayout = () => {
+    // State hooks need to remain outside return
     const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
     const [animationDirection, setAnimationDirection] = useState('right');
-
-    // Current active category with fallback to prevent "undefined"
-    const activeCategory = CATEGORIES[currentCategoryIndex] || CATEGORIES[0] || 'Weddings';
-
-    // Navigation functions with enhanced animation sequence
-    const goToPrevious = () => {
-        if (isAnimating) return;
-
-        setAnimationDirection('left');
-        setIsAnimating(true);
-
-        setTimeout(() => {
-            setCurrentCategoryIndex((prev) =>
-                prev === 0 ? CATEGORIES.length - 1 : prev - 1
-            );
-
-            setTimeout(() => {
-                setIsAnimating(false);
-            }, 400);
-        }, 300);
-    };
-
-    const goToNext = () => {
-        if (isAnimating) return;
-
-        setAnimationDirection('right');
-        setIsAnimating(true);
-
-        setTimeout(() => {
-            setCurrentCategoryIndex((prev) =>
-                prev === CATEGORIES.length - 1 ? 0 : prev + 1
-            );
-
-            setTimeout(() => {
-                setIsAnimating(false);
-            }, 400);
-        }, 300);
-    };
 
     return (
         <div className="w-full bg-white">
@@ -63,7 +26,22 @@ const GalleryLayout = () => {
                     {/* High-visibility navigation controls with enhanced animation and color */}
                     <div className="flex space-x-2">
                         <button
-                            onClick={goToPrevious}
+                            onClick={() => {
+                                if (isAnimating) return;
+
+                                setAnimationDirection('left');
+                                setIsAnimating(true);
+
+                                setTimeout(() => {
+                                    setCurrentCategoryIndex((prev) =>
+                                        prev === 0 ? CATEGORIES.length - 1 : prev - 1
+                                    );
+
+                                    setTimeout(() => {
+                                        setIsAnimating(false);
+                                    }, 400);
+                                }, 300);
+                            }}
                             disabled={isAnimating}
                             className="w-9 h-9 bg-gradient-to-r from-sky-100 to-blue-200 hover:from-sky-200 hover:to-blue-300 rounded-full
                                        flex items-center justify-center shadow-lg hover:shadow-blue-100/50
@@ -74,7 +52,22 @@ const GalleryLayout = () => {
                         </button>
 
                         <button
-                            onClick={goToNext}
+                            onClick={() => {
+                                if (isAnimating) return;
+
+                                setAnimationDirection('right');
+                                setIsAnimating(true);
+
+                                setTimeout(() => {
+                                    setCurrentCategoryIndex((prev) =>
+                                        prev === CATEGORIES.length - 1 ? 0 : prev + 1
+                                    );
+
+                                    setTimeout(() => {
+                                        setIsAnimating(false);
+                                    }, 400);
+                                }, 300);
+                            }}
                             disabled={isAnimating}
                             className="w-9 h-9 bg-gradient-to-r from-sky-100 to-blue-200 hover:from-sky-200 hover:to-blue-300 rounded-full
                                        flex items-center justify-center shadow-lg hover:shadow-blue-100/50
@@ -100,7 +93,7 @@ const GalleryLayout = () => {
                         `}
                     >
                         {/* Pass the activeCategory prop to GalleryImages */}
-                        <GalleryImages activeCategory={activeCategory} />
+                        <GalleryImages activeCategory={CATEGORIES[currentCategoryIndex] || CATEGORIES[0] || 'Weddings'} />
                     </div>
                 </div>
             </div>

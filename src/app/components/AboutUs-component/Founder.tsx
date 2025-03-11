@@ -1,27 +1,13 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const Founder = () => {
-    useEffect(() => {
-        // Fade in animation for text content
-        const textContent = document.querySelector('.founder-text');
-        if (textContent) {
-            textContent.classList.add('animate-fade-in');
-        }
-
-        // Slide in animation for image
-        const imageWrapper = document.querySelector('.founder-image-wrapper');
-        if (imageWrapper) {
-            imageWrapper.classList.add('animate-slide-in');
-        }
-    }, []);
-
     return (
         <div className="py-20 bg-gray-50">
             <div className="container mx-auto px-6">
                 <div className="flex flex-col md:flex-row items-center gap-8">
-                    <div className="w-full md:w-3/5 founder-text opacity-0 transition-opacity duration-1000 ease-in-out pr-4">
+                    <div className="w-full md:w-3/5 founder-text pr-4 animate-fade-in">
                         <h2 className="text-4xl font-bold mb-6 text-black transform transition-transform duration-700 hover:translate-x-2">
                             Meet the Founder
                         </h2>
@@ -35,7 +21,7 @@ const Founder = () => {
 
                     <div className="w-full md:w-1/2 flex justify-center">
                         <div
-                            className="founder-image-wrapper rounded-lg overflow-hidden shadow-xl transform transition-all duration-700 hover:scale-105 hover:shadow-2xl opacity-0 translate-x-8 md:translate-x-8"
+                            className="founder-image-wrapper rounded-lg overflow-hidden shadow-xl transform transition-all duration-700 hover:scale-105 hover:shadow-2xl animate-slide-in"
                             style={{
                                 width: "100%",
                                 maxWidth: "430px",

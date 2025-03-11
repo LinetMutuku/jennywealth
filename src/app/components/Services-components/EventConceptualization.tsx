@@ -1,21 +1,18 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 const EventConceptualization = () => {
     const [isVisible, setIsVisible] = useState(false);
 
-    useEffect(() => {
-        // Add a small delay before starting animations
-        const timer = setTimeout(() => {
-            setIsVisible(true);
-        }, 100);
-
-        return () => clearTimeout(timer);
-    }, []);
-
     return (
         <div className="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
+            {/* Animation trigger */}
+            {typeof window !== 'undefined' && !isVisible && (
+                setTimeout(() => setIsVisible(true), 100),
+                    null // Return null to avoid rendering anything
+            )}
+
             {/* Image Section with fade-in and slide-up animation */}
             <div
                 className={`w-full md:w-1/2 transform transition-all duration-1000 ease-out ${

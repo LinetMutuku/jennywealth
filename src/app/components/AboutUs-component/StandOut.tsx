@@ -1,22 +1,10 @@
 'use client';
 
-import React, { useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
+import React from 'react';
+import { motion } from 'framer-motion';
 import FeatureCard from './FeatureCard';
 
 const StandOut = () => {
-    const controls = useAnimation();
-    const [ref, inView] = useInView({
-        threshold: 0.2
-    });
-
-    useEffect(() => {
-        if (inView) {
-            controls.start('visible');
-        }
-    }, [controls, inView]);
-
     const features = [
         {
             title: "Proven Expertise",
@@ -97,12 +85,13 @@ const StandOut = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
         >
-            <div className="container mx-auto px-4" ref={ref}>
+            <div className="container mx-auto px-4">
                 <motion.h2
                     className="text-4xl font-bold text-center mb-6 text-black"
                     variants={headingVariants}
                     initial="hidden"
-                    animate={controls}
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
                 >
                     Why we Stand Out
                 </motion.h2>
@@ -111,7 +100,8 @@ const StandOut = () => {
                     className="text-center max-w-3xl mx-auto mb-16 text-gray-700 text-xl"
                     variants={paragraphVariants}
                     initial="hidden"
-                    animate={controls}
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
                 >
                     We go beyond just event planning—we create flawless experiences that are meticulously tailored to meet your vision. Here's why our clients trust us:
                 </motion.p>
@@ -120,7 +110,8 @@ const StandOut = () => {
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
                     variants={containerVariants}
                     initial="hidden"
-                    animate={controls}
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.2 }}
                 >
                     {features.map((feature, index) => (
                         <FeatureCard

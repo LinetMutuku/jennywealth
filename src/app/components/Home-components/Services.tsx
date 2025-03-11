@@ -1,46 +1,24 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState, useRef } from 'react';
+import { useState } from 'react';
 
 const Services = () => {
-    const [isVisible, setIsVisible] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
-    const sectionRef = useRef<HTMLElement | null>(null);
-    const imageRef = useRef<HTMLDivElement | null>(null);
+    const [isClient, setIsClient] = useState(false);
 
-    // Track scroll position for animations
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                    observer.unobserve(entry.target);
-                }
-            },
-            { threshold: 0.2 }
-        );
-
-        if (sectionRef.current) {
-            observer.observe(sectionRef.current);
-        }
-
-        return () => {
-            if (sectionRef.current) {
-                observer.unobserve(sectionRef.current);
-            }
-        };
-    }, []);
+    // Set isClient to true on client-side render
+    if (typeof window !== 'undefined' && !isClient) {
+        setIsClient(true);
+    }
 
     // Track mouse position for image tilt effect
-    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-        if (imageRef.current) {
-            const rect = imageRef.current.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / rect.width;
-            const y = (e.clientY - rect.top) / rect.height;
+    const handleMouseMove = (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
 
-            setMousePosition({ x, y });
-        }
+        setMousePosition({ x, y });
     };
 
     // Reset image position when mouse leaves
@@ -50,7 +28,6 @@ const Services = () => {
 
     return (
         <section
-            ref={sectionRef}
             className="py-20 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden"
         >
             {/* Animated background elements */}
@@ -64,23 +41,23 @@ const Services = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     {/* Text content with animations */}
                     <div className={`transform transition-all duration-1000 ${
-                        isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-16'
+                        isClient ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-16'
                     }`}>
                         <h2 className="text-3xl md:text-4xl font-serif mb-6 text-black relative inline-block">
                             <span className="relative z-10">Our Expert Event Management Services</span>
                             <span className={`absolute bottom-0 left-0 h-1 bg-yellow-400 transition-all duration-1000 ease-out delay-700 ${
-                                isVisible ? 'w-full' : 'w-0'
+                                isClient ? 'w-full' : 'w-0'
                             }`}></span>
                         </h2>
 
                         <p className={`text-gray-700 mb-8 transition-all duration-700 delay-300 ${
-                            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                            isClient ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                         }`}>
                             We handle every detail, from event conceptualization and budget planning to venue coordination, décor, and on-site management, ensuring a seamless and unforgettable experience.
                         </p>
 
                         <div className={`relative transition-all duration-700 delay-500 ${
-                            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                            isClient ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                         }`}>
                             <Link
                                 href="/services"
@@ -98,9 +75,8 @@ const Services = () => {
 
                     {/* Image with interactive effects */}
                     <div
-                        ref={imageRef}
                         className={`relative overflow-hidden rounded shadow-2xl transform transition-all duration-1000 group ${
-                            isVisible ? 'opacity-100 translate-x-0 rotate-0' : 'opacity-0 translate-x-16 rotate-3'
+                            isClient ? 'opacity-100 translate-x-0 rotate-0' : 'opacity-0 translate-x-16 rotate-3'
                         }`}
                         onMouseMove={handleMouseMove}
                         onMouseLeave={handleMouseLeave}

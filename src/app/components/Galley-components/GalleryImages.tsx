@@ -10,7 +10,6 @@ interface GalleryImagesProps {
 }
 
 const GalleryImages: React.FC<GalleryImagesProps> = ({ activeCategory }) => {
-    // State for the modal
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [modalPosition, setModalPosition] = useState<{
@@ -20,46 +19,34 @@ const GalleryImages: React.FC<GalleryImagesProps> = ({ activeCategory }) => {
         height: number
     } | null>(null);
 
-    // Handle share with image center position tracking
-    const handleShareImage = (
-        src: string,
-        position: { x: number, y: number, width: number, height: number }
-    ) => {
-        setSelectedImage(src);
-        setModalPosition(position);
-        setIsModalOpen(true);
-    };
-
-    // Function to handle closing the modal
-    const closeShareModal = () => {
-        setIsModalOpen(false);
-        setTimeout(() => {
-            setModalPosition(null);
-            setSelectedImage(null);
-        }, 200);
-    };
-
-    // Get gallery rows for active category (fallback to Weddings if category doesn't exist)
-    const galleryRows = galleryData[activeCategory] || galleryData['Weddings'];
-
     return (
         <div className="w-full max-w-[1240px] mx-auto px-4 py-8">
             {/* Share Modal with image center position */}
             <ShareModal
                 isOpen={isModalOpen}
-                onClose={closeShareModal}
+                onClose={() => {
+                    setIsModalOpen(false);
+                    setTimeout(() => {
+                        setModalPosition(null);
+                        setSelectedImage(null);
+                    }, 200);
+                }}
                 image={selectedImage}
                 position={modalPosition}
             />
 
             {/* Gallery Rows */}
-            {galleryRows.map((row, index) => (
+            {(galleryData[activeCategory] || galleryData['Weddings']).map((row, index) => (
                 <GalleryRow
                     key={`${activeCategory}-row-${index}`}
                     layout={row.layout}
                     images={row.images}
-                    onShareImage={handleShareImage}
-                    isLastRow={index === galleryRows.length - 1}
+                    onShareImage={(src, position) => {
+                        setSelectedImage(src);
+                        setModalPosition(position);
+                        setIsModalOpen(true);
+                    }}
+                    isLastRow={index === (galleryData[activeCategory] || galleryData['Weddings']).length - 1}
                 />
             ))}
         </div>

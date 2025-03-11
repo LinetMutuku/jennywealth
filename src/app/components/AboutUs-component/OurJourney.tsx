@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 
 // Define a type for the tab options
 type TabType = 'mission' | 'vision';
@@ -8,8 +8,6 @@ type TabType = 'mission' | 'vision';
 const OurJourney = () => {
     const [activeTab, setActiveTab] = useState<TabType>('mission');
     const [animating, setAnimating] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
-    const sectionRef = useRef<HTMLDivElement>(null);
 
     // Function to handle tab changes with proper typing
     const handleTabChange = (tab: TabType) => {
@@ -24,31 +22,8 @@ const OurJourney = () => {
         }
     };
 
-    // Detect when section is in viewport
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                    observer.unobserve(entry.target);
-                }
-            },
-            { threshold: 0.2 }
-        );
-
-        if (sectionRef.current) {
-            observer.observe(sectionRef.current);
-        }
-
-        return () => {
-            if (sectionRef.current) {
-                observer.unobserve(sectionRef.current);
-            }
-        };
-    }, []);
-
     return (
-        <div ref={sectionRef} className="py-20 bg-white relative overflow-hidden">
+        <div className="py-20 bg-white relative overflow-hidden">
             {/* Decorative background elements */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-yellow-50 rounded-full opacity-50 transform translate-x-1/3 -translate-y-1/3"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-yellow-50 rounded-full opacity-40 transform -translate-x-1/3 translate-y-1/3"></div>
@@ -56,24 +31,18 @@ const OurJourney = () => {
             <div className="container mx-auto px-4 relative">
                 <div className="flex flex-col md:flex-row items-center gap-12">
                     {/* Image side with enhanced animations */}
-                    <div className={`w-full md:w-1/2 transition-all duration-1000 transform ${
-                        isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-16'
-                    }`}>
+                    <div className="w-full md:w-1/2 transition-all duration-1000 transform animate-fade-in-left">
                         <div className="rounded-lg overflow-hidden shadow-xl relative group">
                             {/* Animated borders */}
                             <div className="absolute inset-0 z-10">
-                                <div className={`absolute top-0 left-0 w-0 h-1 bg-yellow-500 transition-all duration-700 ${
-                                    isVisible ? 'w-full' : ''
-                                }`} style={{ transitionDelay: '300ms' }}></div>
-                                <div className={`absolute top-0 right-0 w-1 h-0 bg-yellow-500 transition-all duration-700 ${
-                                    isVisible ? 'h-full' : ''
-                                }`} style={{ transitionDelay: '1000ms' }}></div>
-                                <div className={`absolute bottom-0 right-0 w-0 h-1 bg-yellow-500 transition-all duration-700 ${
-                                    isVisible ? 'w-full' : ''
-                                }`} style={{ transitionDelay: '1700ms' }}></div>
-                                <div className={`absolute bottom-0 left-0 w-1 h-0 bg-yellow-500 transition-all duration-700 ${
-                                    isVisible ? 'h-full' : ''
-                                }`} style={{ transitionDelay: '2400ms' }}></div>
+                                <div className="absolute top-0 left-0 w-0 h-1 bg-yellow-500 transition-all duration-700 animate-border-width"
+                                     style={{ animationDelay: '300ms' }}></div>
+                                <div className="absolute top-0 right-0 w-1 h-0 bg-yellow-500 transition-all duration-700 animate-border-height"
+                                     style={{ animationDelay: '1000ms' }}></div>
+                                <div className="absolute bottom-0 right-0 w-0 h-1 bg-yellow-500 transition-all duration-700 animate-border-width"
+                                     style={{ animationDelay: '1700ms' }}></div>
+                                <div className="absolute bottom-0 left-0 w-1 h-0 bg-yellow-500 transition-all duration-700 animate-border-height"
+                                     style={{ animationDelay: '2400ms' }}></div>
                             </div>
 
                             {/* Overlay effect */}
@@ -88,32 +57,26 @@ const OurJourney = () => {
                     </div>
 
                     {/* Content side with enhanced animations */}
-                    <div className={`w-full md:w-1/2 transition-all duration-1000 transform ${
-                        isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-16'
-                    }`}>
+                    <div className="w-full md:w-1/2 transition-all duration-1000 transform animate-fade-in-right">
                         <h2 className="text-4xl font-bold mb-8 text-black relative inline-block">
                             Our Journey
-                            <span className={`absolute -bottom-2 left-0 h-1 bg-yellow-500 transition-all duration-1000 ease-out ${
-                                isVisible ? 'w-full' : 'w-0'
-                            }`} style={{ transitionDelay: '300ms' }}></span>
+                            <span className="absolute -bottom-2 left-0 h-1 bg-yellow-500 transition-all duration-1000 ease-out animate-border-width"
+                                  style={{ animationDelay: '300ms' }}></span>
                         </h2>
 
-                        <p className={`mb-6 text-gray-700 text-lg transition-all duration-700 ${
-                            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                        }`} style={{ transitionDelay: '500ms' }}>
+                        <p className="mb-6 text-gray-700 text-lg transition-all duration-700 animate-fade-in-up"
+                           style={{ animationDelay: '500ms' }}>
                             Founded in 2016, Jennywealth Event Management has evolved into a premier event planning company renowned for executing bespoke, high-end, and seamless events. Over the years, we have built a reputation for meticulous planning, unmatched creativity, and exceptional client satisfaction.
                         </p>
 
-                        <p className={`mb-8 text-gray-700 text-lg transition-all duration-700 ${
-                            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                        }`} style={{ transitionDelay: '700ms' }}>
+                        <p className="mb-8 text-gray-700 text-lg transition-all duration-700 animate-fade-in-up"
+                           style={{ animationDelay: '700ms' }}>
                             From intimate gatherings to grand-scale events, our expertise continues to set new industry standards.
                         </p>
 
                         {/* Animated tab buttons */}
-                        <div className={`flex gap-4 mb-6 transition-all duration-700 ${
-                            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                        }`} style={{ transitionDelay: '900ms' }}>
+                        <div className="flex gap-4 mb-6 transition-all duration-700 animate-fade-in-up"
+                             style={{ animationDelay: '900ms' }}>
                             <button
                                 className={`px-6 py-3 border-2 border-yellow-500 font-medium rounded-full transition-all duration-300 transform hover:scale-105 relative overflow-hidden ${
                                     activeTab === 'mission'
@@ -144,9 +107,8 @@ const OurJourney = () => {
                         </div>
 
                         {/* Enhanced tab content with animation */}
-                        <div className={`relative mt-4 overflow-hidden transition-all duration-700 ${
-                            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                        }`} style={{ transitionDelay: '1100ms' }}>
+                        <div className="relative mt-4 overflow-hidden transition-all duration-700 animate-fade-in-up"
+                             style={{ animationDelay: '1100ms' }}>
                             <div className={`
                                 p-6 border-t-4 border-yellow-500 bg-gray-50 rounded-lg shadow-lg
                                 transition-all duration-500 ease-in-out relative
@@ -179,6 +141,83 @@ const OurJourney = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Custom animations */}
+            <style jsx>{`
+                @keyframes fadeInLeft {
+                    from {
+                        opacity: 0;
+                        transform: translateX(-4rem);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                }
+                
+                @keyframes fadeInRight {
+                    from {
+                        opacity: 0;
+                        transform: translateX(4rem);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                }
+                
+                @keyframes fadeInUp {
+                    from {
+                        opacity: 0;
+                        transform: translateY(2rem);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+                
+                @keyframes expandWidth {
+                    from {
+                        width: 0;
+                    }
+                    to {
+                        width: 100%;
+                    }
+                }
+                
+                @keyframes expandHeight {
+                    from {
+                        height: 0;
+                    }
+                    to {
+                        height: 100%;
+                    }
+                }
+                
+                .animate-fade-in-left {
+                    opacity: 0;
+                    animation: fadeInLeft 1s forwards;
+                }
+                
+                .animate-fade-in-right {
+                    opacity: 0;
+                    animation: fadeInRight 1s forwards;
+                }
+                
+                .animate-fade-in-up {
+                    opacity: 0;
+                    animation: fadeInUp 0.8s forwards;
+                }
+                
+                .animate-border-width {
+                    animation: expandWidth 0.8s forwards;
+                }
+                
+                .animate-border-height {
+                    animation: expandHeight 0.8s forwards;
+                }
+            `}</style>
         </div>
     );
 };

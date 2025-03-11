@@ -1,41 +1,40 @@
 'use client';
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 const BudgetManagement = () => {
+    // Animation states
     const [isVisible, setIsVisible] = useState(false);
     const [animateNumbers, setAnimateNumbers] = useState(false);
-    const componentRef = useRef(null);
-
-    useEffect(() => {
-        // Initial animation on load
-        const timer = setTimeout(() => {
-            setIsVisible(true);
-        }, 100);
-
-        // Set up intersection observer for scroll-based animations
-        const observer = new IntersectionObserver(
-            (entries) => {
-                if (entries[0].isIntersecting) {
-                    setAnimateNumbers(true);
-                    observer.disconnect();
-                }
-            },
-            { threshold: 0.3 }
-        );
-
-        if (componentRef.current) {
-            observer.observe(componentRef.current);
-        }
-
-        return () => {
-            clearTimeout(timer);
-            observer.disconnect();
-        };
-    }, []);
 
     return (
-        <div ref={componentRef} className="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center">
+        <div id="budget-component" className="flex flex-col md:flex-row-reverse gap-8 md:gap-12 items-center">
+            {/* Client-side animation triggers */}
+            {typeof window !== 'undefined' && !isVisible && (
+                setTimeout(() => setIsVisible(true), 100),
+                    null // Return null to avoid rendering anything
+            )}
+
+            {typeof window !== 'undefined' && !animateNumbers && typeof IntersectionObserver !== 'undefined' && (
+                (() => {
+                    requestAnimationFrame(() => {
+                        const observer = new IntersectionObserver(
+                            (entries) => {
+                                if (entries[0]?.isIntersecting) {
+                                    setAnimateNumbers(true);
+                                    observer.disconnect();
+                                }
+                            },
+                            { threshold: 0.3 }
+                        );
+
+                        const element = document.getElementById('budget-component');
+                        if (element) observer.observe(element);
+                    });
+                    return null; // Return null to avoid rendering anything
+                })()
+            )}
+
             {/* Image Section with reveal animation */}
             <div
                 className={`w-full md:w-1/2 overflow-hidden rounded-lg transform transition-all duration-1000 ease-out ${

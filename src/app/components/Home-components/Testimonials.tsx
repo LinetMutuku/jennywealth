@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState, useRef } from 'react';
+import { useState } from 'react';
 
 // Define type for testimonial ID
 type TestimonialId = number | null;
@@ -15,31 +15,13 @@ interface Testimonial {
 }
 
 const Testimonials = () => {
-    const [isVisible, setIsVisible] = useState(false);
     const [activeTestimonial, setActiveTestimonial] = useState<TestimonialId>(null);
-    const sectionRef = useRef<HTMLElement | null>(null);
+    const [isClient, setIsClient] = useState(false);
 
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                    observer.unobserve(entry.target);
-                }
-            },
-            { threshold: 0.2 }
-        );
-
-        if (sectionRef.current) {
-            observer.observe(sectionRef.current);
-        }
-
-        return () => {
-            if (sectionRef.current) {
-                observer.unobserve(sectionRef.current);
-            }
-        };
-    }, []);
+    // Set isClient to true after initial render (client-side only)
+    if (typeof window !== 'undefined' && !isClient) {
+        setIsClient(true);
+    }
 
     const testimonials: Testimonial[] = [
         {
@@ -58,7 +40,6 @@ const Testimonials = () => {
 
     return (
         <section
-            ref={sectionRef}
             className="py-20 bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden"
         >
             {/* Decorative elements */}
@@ -68,12 +49,12 @@ const Testimonials = () => {
 
                 {/* Animated quote symbols */}
                 <div className={`absolute top-20 left-1/4 text-yellow-300/20 text-9xl transition-all duration-1000 transform ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-20'
+                    isClient ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-20'
                 }`} style={{ fontFamily: 'serif' }}>
                     "
                 </div>
                 <div className={`absolute bottom-20 right-1/4 text-yellow-300/20 text-9xl transition-all duration-1000 transform ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+                    isClient ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
                 }`} style={{ fontFamily: 'serif' }}>
                     "
                 </div>
@@ -81,12 +62,12 @@ const Testimonials = () => {
 
             <div className="container mx-auto px-4 relative z-10">
                 <div className={`text-center mb-12 transition-all duration-700 transform ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
+                    isClient ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
                 }`}>
                     <h2 className="text-3xl md:text-4xl font-serif mb-4 text-black relative inline-block">
                         What Our Clients Say
                         <span className={`absolute bottom-0 left-0 h-1 bg-yellow-400 transition-all duration-1000 ease-out delay-300 ${
-                            isVisible ? 'w-full' : 'w-0'
+                            isClient ? 'w-full' : 'w-0'
                         }`}></span>
                     </h2>
                 </div>
@@ -96,7 +77,7 @@ const Testimonials = () => {
                         <div
                             key={testimonial.id}
                             className={`bg-white p-6 rounded-lg shadow-lg flex relative group overflow-hidden transition-all duration-500 transform ${
-                                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
+                                isClient ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
                             }`}
                             style={{ transitionDelay: `${300 + index * 200}ms` }}
                             onMouseEnter={() => setActiveTestimonial(testimonial.id)}
@@ -143,7 +124,7 @@ const Testimonials = () => {
                 </div>
 
                 <div className={`text-center mt-10 transition-all duration-700 delay-700 transform ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                    isClient ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                 }`}>
                     <Link
                         href="/testimonials"
@@ -168,13 +149,13 @@ const Testimonials = () => {
 
             {/* Animated particles */}
             <div className={`absolute w-2 h-2 rounded-full bg-yellow-300/40 top-1/3 left-1/4 transition-opacity duration-1000 ${
-                isVisible ? 'opacity-100' : 'opacity-0'
+                isClient ? 'opacity-100' : 'opacity-0'
             }`} style={{ animation: 'float 8s ease-in-out infinite' }}></div>
             <div className={`absolute w-3 h-3 rounded-full bg-yellow-300/30 top-2/3 right-1/3 transition-opacity duration-1000 ${
-                isVisible ? 'opacity-100' : 'opacity-0'
+                isClient ? 'opacity-100' : 'opacity-0'
             }`} style={{ animation: 'float 12s ease-in-out infinite', animationDelay: '1s' }}></div>
             <div className={`absolute w-4 h-4 rounded-full bg-yellow-300/20 bottom-1/4 right-1/4 transition-opacity duration-1000 ${
-                isVisible ? 'opacity-100' : 'opacity-0'
+                isClient ? 'opacity-100' : 'opacity-0'
             }`} style={{ animation: 'float 10s ease-in-out infinite', animationDelay: '2s' }}></div>
 
             {/* Custom animations */}

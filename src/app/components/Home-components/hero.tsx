@@ -8,18 +8,21 @@ import Navbar from '../Navbar';
 type ButtonType = 'event' | 'gallery' | null;
 
 export default function Hero() {
+    // These state hooks need to remain outside the return
     const [currentImage, setCurrentImage] = useState('/assets/heroimg.jpeg');
     const [nextImage, setNextImage] = useState('');
     const [transitioning, setTransitioning] = useState(false);
     const [activeButton, setActiveButton] = useState<ButtonType>(null);
     const [animationComplete, setAnimationComplete] = useState(false);
 
+    // Images array
     const images = [
         '/assets/heroimg.jpeg',
         '/assets/hero2.jpeg',
         '/assets/hero3.jpeg'
     ];
 
+    // We need to keep the useEffect outside the return statement
     useEffect(() => {
         // Start content animations after a short delay
         const timer = setTimeout(() => {
@@ -45,15 +48,6 @@ export default function Hero() {
             clearTimeout(timer);
         };
     }, []);
-
-    // Animation classes for title words with staggered timing
-    const wordAnimations = [
-        'animate-fade-in-down delay-300',
-        'animate-fade-in-down delay-500',
-        'animate-fade-in-down delay-700',
-        'animate-fade-in-down delay-900',
-        'animate-fade-in-down delay-1000'
-    ];
 
     return (
         <div className="relative h-screen overflow-hidden">
@@ -88,11 +82,12 @@ export default function Hero() {
             {/* Hero Content with enhanced animations */}
             <div className="relative z-10 h-full flex flex-col justify-center items-center text-center text-white px-4">
                 <h1 className="text-2xl md:text-6xl lg:text-5xl font-serif mb-5 max-w-2xl leading-tight">
-                    <span className={`inline-block ${wordAnimations[0]} opacity-0`}>Creating</span>{' '}
-                    <span className={`inline-block ${wordAnimations[1]} opacity-0`}>Unforgettable</span>{' '}
-                    <span className={`inline-block ${wordAnimations[2]} opacity-0`}>Moments</span>{' '}
-                    <span className={`inline-block ${wordAnimations[3]} opacity-0`}>with</span>{' '}
-                    <span className={`inline-block ${wordAnimations[4]} opacity-0`}>Perfection</span>
+                    {/* Animation classes for title words with staggered timing - moved inline */}
+                    <span className={`inline-block animate-fade-in-down delay-300 opacity-0`}>Creating</span>{' '}
+                    <span className={`inline-block animate-fade-in-down delay-500 opacity-0`}>Unforgettable</span>{' '}
+                    <span className={`inline-block animate-fade-in-down delay-700 opacity-0`}>Moments</span>{' '}
+                    <span className={`inline-block animate-fade-in-down delay-900 opacity-0`}>with</span>{' '}
+                    <span className={`inline-block animate-fade-in-down delay-1000 opacity-0`}>Perfection</span>
                 </h1>
 
                 <p className="text-lg md:text-xl max-w-2xl mb-16 opacity-0 animate-fade-in-up delay-1200 drop-shadow-md">
