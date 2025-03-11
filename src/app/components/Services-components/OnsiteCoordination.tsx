@@ -20,14 +20,14 @@ const OnsiteCoordination = () => {
                 }`}
             >
                 <div
-                    className="relative aspect-[4/3] w-full overflow-hidden rounded-lg transition-transform duration-700 ease-in-out"
+                    className="relative aspect-[3/4] w-full overflow-hidden rounded-lg transition-transform duration-700 ease-in-out"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
                     <img
-                        src="/assets/onsite.jpeg"
+                        src="/assets/birthday-setup.png"
                         alt="On-Site Coordination"
-                        className={`w-full h-full object-cover rounded-lg transition-all duration-700 ease-in-out ${
+                        className={`w-full h-full object-cover object-center rounded-lg transition-all duration-700 ease-in-out ${
                             isHovered ? 'scale-110 brightness-110' : 'scale-100'
                         }`}
                     />
