@@ -18,12 +18,48 @@ const GalleryImageItem: React.FC<GalleryImageItemProps> = ({ src, alt, height, o
     // State to track hover effect
     const [isHovered, setIsHovered] = useState(false);
 
-
-    const getObjectPosition = () => {
+    // Function to determine the best object position based on image content
+    const calculateObjectPosition = () => {
         const altText = alt.toLowerCase();
+        const srcPath = src.toLowerCase();
+
+        // Special cases for problematic images that need specific positioning
+        if (srcPath.includes('birthday-setup.png')) {
+            // For this image, use contain to ensure the full image is visible
+            return 'center center';
+        }
+
+        if (srcPath.includes('social-charity.png')) {
+            return 'center 10%';
+        }
+
+        if (srcPath.includes('birthday-entertainment.png')) {
+            return 'center 5%';
+        }
+
+        if (srcPath.includes('luxury-seating.png')) {
+            return 'center 15%';
+        }
+
+        if (srcPath.includes('couplephoto.png')) {
+            return 'center center';
+        }
+
+        if (srcPath.includes('weddingcouple.png')) {
+            return 'center center';
+        }
+
+        if (srcPath.includes('wedding-couple.png')) {
+            return 'center center';
+        }
+
+        // Handle birthday images
+        if (altText.includes('birthday')) {
+            return 'center center';
+        }
 
         if (altText.includes('couple')) {
-            return 'center 25%';
+            return 'center center';
         }
 
         if (altText.includes('bride')) {
@@ -69,6 +105,9 @@ const GalleryImageItem: React.FC<GalleryImageItemProps> = ({ src, alt, height, o
         }
     };
 
+    // Calculate the object position once
+    const objectPosition = calculateObjectPosition();
+
     return (
         <div
             ref={imageContainerRef}
@@ -77,16 +116,30 @@ const GalleryImageItem: React.FC<GalleryImageItemProps> = ({ src, alt, height, o
             onMouseLeave={() => setIsHovered(false)}
         >
             {/* Image with optimized object-position */}
-            <img
-                src={src}
-                alt={alt}
-                onLoad={() => setImageLoaded(true)}
-                className="w-full h-full object-cover transition-opacity duration-300"
-                style={{
-                    objectPosition: getObjectPosition(),
-                    opacity: imageLoaded ? 1 : 0
-                }}
-            />
+            {/* Special handling for birthday-setup.png */}
+            {src.includes('birthday-setup.png') ? (
+                <img
+                    src={src}
+                    alt={alt}
+                    onLoad={() => setImageLoaded(true)}
+                    className="w-full h-full object-cover transition-opacity duration-300"
+                    style={{
+                        objectPosition: "center 30%",
+                        opacity: imageLoaded ? 1 : 0
+                    }}
+                />
+            ) : (
+                <img
+                    src={src}
+                    alt={alt}
+                    onLoad={() => setImageLoaded(true)}
+                    className="w-full h-full object-cover transition-opacity duration-300"
+                    style={{
+                        objectPosition,
+                        opacity: imageLoaded ? 1 : 0
+                    }}
+                />
+            )}
 
             {/* Darker overlay on hover - with gradient */}
             <div

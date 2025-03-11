@@ -317,7 +317,7 @@ export const galleryData: GalleryDataByCategory = {
                     alt: 'White glove service at luxury dining event'
                 },
                 small2: {
-                    src: '/assets/luxury-venue.png',
+                    src: '/assets/corporate-speaker.png',
                     alt: 'Ambient lighting for luxury dining experience'
                 }
             }
@@ -353,7 +353,7 @@ export const galleryData: GalleryDataByCategory = {
                     alt: 'Live music performance at social gathering'
                 },
                 small2: {
-                    src: '/assets/social-interaction.png',
+                    src: '/assets/social-entertainment.png',
                     alt: 'Dance floor at social event'
                 }
             }

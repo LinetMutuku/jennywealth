@@ -26,10 +26,10 @@ const Founder = () => {
                             Meet the Founder
                         </h2>
                         <h3 className="text-xl font-semibold mb-6 text-gray-800 transform transition-transform duration-700 hover:translate-x-2">
-                            Jennifer Ayaola Peters, CEO & Lead Planner
+                            Jennifer Awomolo, CEO & Lead Planner
                         </h3>
                         <p className="mb-6 text-gray-700 text-lg transform transition-all duration-700 hover:text-gray-900">
-                            With over a decade of experience in event management, Jennifer Ayaola Peters has built Jennywealth into a trusted name in the industry. Her keen eye for detail, creative vision, and commitment to excellence ensure every event is nothing short of spectacular. She believes that every event tells a story, and she strives to bring each client's unique vision to life with elegance and precision.
+                            With over a decade of experience in event management, Jennifer Awomolo has built Jennywealth into a trusted name in the industry. Her keen eye for detail, creative vision, and commitment to excellence ensure every event is nothing short of spectacular. She believes that every event tells a story, and she strives to bring each client's unique vision to life with elegance and precision.
                         </p>
                     </div>
 
