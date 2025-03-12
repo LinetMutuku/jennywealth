@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 const GalleryHero = () => {
     return (
         <div>
-            {/* Hero Image with just "Gallery" text */}
             <motion.div
                 className="relative w-full h-[55vh] md:h-[65vh] overflow-hidden"
                 initial={{ opacity: 0 }}
