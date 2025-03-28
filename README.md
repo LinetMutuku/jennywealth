@@ -65,4 +65,3 @@ Configuration Files – Includes setup files for Next.js, Tailwind CSS, and Type
 
 
 
-For inquiries and event bookings, visit our [official website]().
