@@ -38,27 +38,25 @@ Tailwind CSS – Provides a clean and responsive UI with minimal custom CSS.
 To run the project locally, follow these steps:
 
 1️⃣ Clone the Repository
-bash
-Copy
-Edit
-git clone https://github.com/LinetMutuku/jennywealth.git
 
-cd jennywealth
+* _git clone https://github.com/LinetMutuku/jennywealth.git_
+
+
+  _Navigate to the project directory:_
+* _cd jennywealth_
 
 2️⃣ Install Dependencies
-bash
-Copy
-Edit
-npm install
+
+_npm install_
 
 3️⃣ Run the Development Server
-bash
-Copy
-Edit
-npm run dev
+
+_npm run dev_
+
 The application will be available at: http://localhost:3000
 
 📂 Project Structure
+
 src/app – Contains core application logic and page components.
 
 public/ – Stores static assets such as images and icons.
@@ -67,4 +65,4 @@ Configuration Files – Includes setup files for Next.js, Tailwind CSS, and Type
 
 
 
-For inquiries and event bookings, visit our official website.
+For inquiries and event bookings, visit our [official website]().
