@@ -66,7 +66,7 @@ const Footer: React.FC = () => {
                     <div className="col-span-1 md:col-span-2">
                         <h3 className="text-lg font-semibold mb-4">Contact Info:</h3>
                         <ul className="space-y-2">
-                            <li>Phone: +234 802 340 0654</li>
+                            <li>Phone: +234 8160142346</li>
                             <li>Email: contact@jennywealthhoneybee.com</li>
                             <li>Address: B20 Capaital Mall orchid road, Lekki Lagos</li>
                         </ul>
