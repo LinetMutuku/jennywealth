@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
                         <ul className="space-y-2">
                             <li>Phone: +2348160142346</li>
                             <li>Email: contact@jennywealthhoneybee.com</li>
-                            <li>Address: B20 Capaital Mall orchid road, Lekki Lagos</li>
+                            <li>Address: B20 Capital Mall orchid road, Lekki Lagos</li>
                         </ul>
                     </div>
                 </div>
