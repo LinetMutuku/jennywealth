@@ -1,6 +1,6 @@
 # **Jennywealth Honeybee Events Management Website**
 
-Welcome to the official repository of Jennywealth Honeybee Events Management, a premium event planning and management company dedicated to delivering unforgettable experiences in N igeria. This project powers the company's digital presence, offering a seamless way for clients to explore services, view past events, and get in touch.
+Welcome to the official repository of Jennywealth Honeybee Events Management, a premium event planning and management company dedicated to delivering unforgettable experiences in Nigeria. This project powers the company's digital presence, offering a seamless way for clients to explore services, view past events, and get in touch.
 
 🌐 Live Website
 Visit the live website:https://www.jennywealthhoneybee.com/
